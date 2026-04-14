@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.dicksmedia.com",
+  "path": "index",
+  "timestamp": "2026-04-14T22:56:15.302Z",
+  "title": "DICK'S Media | Powering Every Win",
+  "template": "landing-page",
+  "blocks": [
+    "hero",
+    "stats",
+    "columns",
+    "columns",
+    "columns",
+    "cards",
+    "cards",
+    "accordion"
+  ]
+}

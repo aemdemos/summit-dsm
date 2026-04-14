@@ -270,12 +270,25 @@ header nav .nav-tools {
   grid-area: tools;
 }
 
-header nav .nav-tools .button {
+header nav .nav-tools p {
   margin: 0;
-  border: none;
-  padding: 0.5em;
-  background: none;
-  line-height: 0;
+}
+
+header nav .nav-tools a.button {
+  margin: 0;
+  padding: 0.5em 1.2em;
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+header nav .nav-tools a.button:hover {
+  background-color: var(--accent-color);
+  color: #006554;
 }
 
 /* breadcrumbs */

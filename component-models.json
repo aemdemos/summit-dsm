@@ -301,5 +301,40 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "stats",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "heading",
+        "label": "Heading",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "stat1",
+        "label": "Stat 1",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "stat2",
+        "label": "Stat 2",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "stat3",
+        "label": "Stat 3",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cta",
+        "label": "Call to Action",
+        "valueType": "string"
+      }
+    ]
   }
 ]

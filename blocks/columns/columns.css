@@ -7,6 +7,7 @@
 
 .columns img {
   width: 100%;
+  border-radius: 12px;
 }
 
 .columns > div > div {
@@ -19,6 +20,20 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+}
+
+.columns h2 {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.columns a.button {
+  background-color: var(--accent-color);
+  color: #006554;
+  border-radius: 300px;
+  padding: 0.6em 2em;
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 @media (width >= 900px) {

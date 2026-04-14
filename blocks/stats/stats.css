@@ -1,0 +1,57 @@
+/* Stats block — stat cards with large numbers */
+main .stats-container {
+  background-color: var(--background-color);
+}
+
+main .stats {
+  color: var(--text-color);
+}
+
+main .stats > div:first-child h2 {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 500;
+  margin-bottom: 1.5em;
+}
+
+/* Stat cards layout */
+main .stats > div:not(:first-child, :last-child) {
+  background-color: var(--accent-color);
+  color: #006554;
+  border-radius: 12px;
+  padding: 1.5em;
+  margin-bottom: 1em;
+}
+
+main .stats > div:not(:first-child, :last-child) h1 {
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 700;
+  margin: 0;
+  color: #006554;
+}
+
+main .stats > div:not(:first-child, :last-child) p {
+  margin: 0.25em 0 0;
+  font-size: var(--body-font-size-s);
+}
+
+/* CTA row */
+main .stats > div:last-child a {
+  color: var(--accent-color);
+}
+
+@media (width >= 900px) {
+  main .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5em;
+  }
+
+  main .stats > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  main .stats > div:last-child {
+    grid-column: 1 / -1;
+    text-align: right;
+  }
+}

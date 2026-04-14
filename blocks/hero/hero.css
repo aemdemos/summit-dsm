@@ -9,13 +9,34 @@
   position: relative;
   padding: var(--hero-padding);
   min-height: var(--hero-min-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-color);
 }
 
 .hero h1 {
   max-width: var(--hero-heading-max-width);
   margin-left: auto;
   margin-right: auto;
-  color: var(--background-color);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero p {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero a.button {
+  background-color: var(--accent-color);
+  color: #006554;
+  border-radius: 300px;
+  padding: 0.6em 2em;
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 .hero picture {
@@ -32,8 +53,18 @@
   height: 100%;
 }
 
+/* Dark overlay on hero background image */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+  z-index: -1;
+}
+
 @media (width >= 900px) {
   .hero {
     padding: var(--hero-padding-desktop);
+    min-height: 600px;
   }
 }

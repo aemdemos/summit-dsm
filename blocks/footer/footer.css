@@ -1,8 +1,10 @@
 @import url('./footer-tokens.css');
 
 footer {
-  background-color: var(--light-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-size: var(--body-font-size-xs);
+  border-top: 1px solid #333;
 }
 
 footer .footer > div {
@@ -15,8 +17,39 @@ footer .footer p {
   margin: 0;
 }
 
+footer .footer a {
+  color: var(--text-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.05em;
+}
+
+footer .footer a:hover {
+  color: var(--accent-color);
+}
+
+footer .footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+
+footer .footer img {
+  max-width: 160px;
+  height: auto;
+}
+
 @media (width >= 900px) {
   footer .footer > div {
     padding: var(--footer-padding-desktop);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
   }
 }

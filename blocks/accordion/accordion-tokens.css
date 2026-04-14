@@ -1,8 +1,8 @@
-/* accordion design tokens */
+/* accordion design tokens — dark theme */
 :root {
   --accordion-item-border-width: 1px;
-  --accordion-item-border-color: #dadada;
-  --accordion-item-gap: 24px;
+  --accordion-item-border-color: #333;
+  --accordion-item-gap: 0;
   --accordion-label-padding-x: 16px;
   --accordion-label-padding-right: 46px;
   --accordion-label-icon-right: 18px;

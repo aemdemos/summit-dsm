@@ -11,11 +11,35 @@
 
 .cards > ul > li {
   border: var(--cards-card-border-width) solid var(--cards-card-border-color);
-  background-color: var(--background-color);
+  background-color: var(--light-color);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .cards .cards-card-body {
   margin: var(--cards-card-body-margin);
+}
+
+.cards .cards-card-body h3 {
+  color: var(--accent-color);
+  font-size: var(--body-font-size-s);
+  margin: 0 0 0.25em;
+}
+
+.cards .cards-card-body h2 {
+  font-size: var(--heading-font-size-m);
+  margin: 0 0 0.5em;
+}
+
+.cards .cards-card-body p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+.cards .cards-card-body a {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 .cards .cards-card-image {
@@ -26,4 +50,10 @@
   width: 100%;
   aspect-ratio: var(--cards-image-aspect-ratio);
   object-fit: var(--cards-image-object-fit);
+}
+
+@media (width >= 900px) {
+  .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

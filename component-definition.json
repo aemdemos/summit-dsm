@@ -281,6 +281,39 @@
           }
         },
         {
+          "title": "Stats",
+          "id": "stats",
+          "model": "stats",
+          "plugins": {
+            "da": {
+              "rows": 5,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "heading",
+                  "selector": "div:nth-child(1)>div"
+                },
+                {
+                  "name": "stat1",
+                  "selector": "div:nth-child(2)>div"
+                },
+                {
+                  "name": "stat2",
+                  "selector": "div:nth-child(3)>div"
+                },
+                {
+                  "name": "stat3",
+                  "selector": "div:nth-child(4)>div"
+                },
+                {
+                  "name": "cta",
+                  "selector": "div:nth-child(5)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Search",
           "id": "search",
           "model": "search",

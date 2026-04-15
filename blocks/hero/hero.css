@@ -35,7 +35,9 @@ main > .section.hero-container > div:not(.bg-image) {
   font-weight: 500;
   text-transform: uppercase;
   line-height: 0.89;
-  font-size: calc(10.284 * 0.012 * min(100vh, 900px) + 1rem);
+
+  /* Responsive font-size matching source formula, scaled ~90% for Oswald (wider than DSGSans) */
+  font-size: calc(9.3 * 0.012 * min(100vh, 900px) + 1rem);
 }
 
 /* Decorative bracket effect on em — [ WHERE BRANDS WIN ] */

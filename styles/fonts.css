@@ -1,9 +1,11 @@
 /* Barlow — body text and buttons (matches dicksmedia.com) */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&display=swap');
+
+/* Oswald — heading substitute for proprietary DSGSans (closest condensed sans-serif match) */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=Oswald:wght@400;500;600;700&display=swap');
 
 /*
  * DSGSans — proprietary DICK'S Sporting Goods font.
- * Not available publicly. Using Arial fallback via dsgsans-fallback in styles.css.
+ * Not available publicly. Using Oswald as closest public substitute.
  * To use the actual font: obtain .woff2 files and add @font-face declarations below.
  * The heading font-family stack in styles.css will pick it up automatically.
  */

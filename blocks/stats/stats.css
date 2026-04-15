@@ -1,17 +1,17 @@
-/* Stats block — exact match to source dicksmedia.com section#counter */
+/* Stats block — matches source dicksmedia.com section#counter */
 
 /* Section-level background */
 main .stats-container {
   background-color: var(--background-color);
 }
 
-/* Override default section max-width — stats section is full-width like source */
+/* Full-width section like source — content centered with fluid gutters */
 main > .section.stats-container > div:not(.bg-image) {
   max-width: 1500px;
-  padding: 0 26px;
+  padding: 0 4vw;
 }
 
-/* Section vertical spacing */
+/* Section vertical spacing matching source */
 main > .section.stats-container {
   padding-top: 79px;
   padding-bottom: 42px;
@@ -22,12 +22,12 @@ main .stats {
   color: var(--text-color);
 }
 
-/* Header: heading + CTA positioned as flex row */
+/* Header: heading + CTA */
 main .stats .stats-header {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-bottom: 2em;
+  margin-bottom: 48px;
 }
 
 main .stats .stats-header h2 {
@@ -38,7 +38,6 @@ main .stats .stats-header h2 {
   text-transform: uppercase;
   color: #f9fbf2;
   margin: 0;
-  flex: 1;
 }
 
 /* CTA button */
@@ -48,7 +47,6 @@ main .stats .stats-header a {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
-  text-align: right;
   text-decoration: none;
   color: #006554;
   background-color: #63ffcb;
@@ -63,7 +61,7 @@ main .stats .stats-header a:hover {
   color: #004d3f;
 }
 
-/* Cards grid */
+/* Cards grid — fluid, fills available width */
 main .stats .stats-cards {
   display: grid;
   grid-template-columns: 1fr;
@@ -123,33 +121,36 @@ main .stats > div:not(.stats-header, .stats-cards) {
   display: none;
 }
 
-/* Desktop — exact source values at 1280px viewport */
+/* Desktop */
 @media (width >= 900px) {
   main .stats .stats-header {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 48px;
+    align-items: flex-end;
+    gap: 48px;
   }
 
   main .stats .stats-header h2 {
-    font-size: 85px;
+    font-size: clamp(60px, 6.5vw, 94px);
     line-height: 0.984;
-    max-width: 80%;
+    flex: 1;
+  }
+
+  main .stats .stats-header a {
+    flex-shrink: 0;
+    align-self: auto;
   }
 
   main .stats .stats-cards {
-    grid-template-columns: repeat(3, 402px);
-    gap: 11px;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   main .stats .stats-cards > div {
-    height: 251px;
+    min-height: clamp(200px, 19vw, 274px);
     padding: 24px 24px 34px;
   }
 
   main .stats .stats-cards h1 {
-    font-size: 116px;
+    font-size: clamp(80px, 8vw, 128px);
     line-height: 0.888;
   }
 }

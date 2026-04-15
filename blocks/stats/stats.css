@@ -15,14 +15,14 @@ main .stats .stats-header {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
 }
 
 main .stats .stats-header h2 {
   font-size: var(--heading-font-size-xl);
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1;
   margin: 0;
   flex: 1;
 }
@@ -33,8 +33,8 @@ main .stats .stats-header a {
   background-color: var(--accent-color);
   color: #006554;
   border-radius: 300px;
-  padding: 0.8em 2em;
-  font-weight: 600;
+  padding: 16px 40px;
+  font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   font-size: var(--body-font-size-s);
@@ -52,7 +52,7 @@ main .stats .stats-header a:hover {
 main .stats .stats-cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1em;
+  gap: 11px;
 }
 
 /* Individual stat card */
@@ -61,7 +61,7 @@ main .stats .stats-cards > div {
   padding: 1.5em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   min-height: 160px;
 }
 
@@ -83,17 +83,18 @@ main .stats .stats-cards > div:nth-child(3) {
 
 /* Stat value (h1) */
 main .stats .stats-cards h1 {
-  font-size: var(--heading-font-size-xxl);
+  font-size: 72px;
   font-weight: 500;
   text-transform: uppercase;
   margin: 0;
-  line-height: 1.1;
+  line-height: 0.9;
 }
 
 /* Stat description (p) */
 main .stats .stats-cards p {
   margin: 0.3em 0 0;
   font-size: var(--body-font-size-s);
+  font-weight: 600;
   line-height: 1.4;
 }
 
@@ -108,11 +109,12 @@ main .stats > div:not(.stats-header, .stats-cards) {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 2em;
+    margin-bottom: 48px;
   }
 
   main .stats .stats-header h2 {
-    font-size: var(--heading-font-size-xxl);
+    font-size: 85px;
+    line-height: 0.98;
     max-width: 70%;
   }
 
@@ -122,11 +124,16 @@ main .stats > div:not(.stats-header, .stats-cards) {
 
   main .stats .stats-cards {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5em;
+    gap: 11px;
   }
 
   main .stats .stats-cards > div {
     min-height: 200px;
-    padding: 2em;
+    padding: 1.2em;
+  }
+
+  main .stats .stats-cards h1 {
+    font-size: 116px;
+    line-height: 0.9;
   }
 }

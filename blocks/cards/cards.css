@@ -1,5 +1,11 @@
 @import url('./cards-tokens.css');
 
+/* Cards section goes full-width like source (1500px max, 4vw gutters) */
+main > .section > .cards-wrapper {
+  max-width: 1500px;
+  padding: 0 4vw;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -28,7 +34,7 @@
   display: block;
 }
 
-/* Card body overlays the image — no gradient, content positioned absolutely */
+/* Card body overlays the image */
 .cards .cards-card-body {
   position: absolute;
   inset: 0;
@@ -38,7 +44,7 @@
   color: #f9fbf2;
 }
 
-/* Card number (h3: "01", "02", etc.) — top area */
+/* Card number (h3: "01", "02", etc.) */
 .cards .cards-card-body h3 {
   font-family: var(--heading-font-family);
   font-size: 28px;

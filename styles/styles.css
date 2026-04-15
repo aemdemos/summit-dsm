@@ -311,3 +311,13 @@ main .section.dark {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Section labels (Solutions, Insights, FAQs) — small uppercase accent text */
+main .section > .default-content-wrapper > p:first-child:last-child {
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--label-color);
+  font-weight: 600;
+  margin-bottom: 0;
+}

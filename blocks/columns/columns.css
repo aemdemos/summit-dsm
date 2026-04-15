@@ -22,19 +22,12 @@
 
 .columns > div > .columns-img-col {
   order: 0;
-}
-
-.columns > div > .columns-img-col {
   overflow: hidden;
+  max-height: 400px;
 }
 
 .columns > div > .columns-img-col img {
   display: block;
-}
-
-/* Mobile: constrain image height so it doesn't dominate */
-.columns > div > .columns-img-col {
-  max-height: 400px;
 }
 
 /* Heading: uppercase */

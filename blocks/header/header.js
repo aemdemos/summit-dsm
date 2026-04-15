@@ -247,6 +247,15 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
+  // Transparent-to-black scroll behavior
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navWrapper.classList.add('nav-scrolled');
+    } else {
+      navWrapper.classList.remove('nav-scrolled');
+    }
+  });
+
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
     navWrapper.append(await buildBreadcrumbs());
   }

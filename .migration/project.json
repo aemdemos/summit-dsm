@@ -1,5 +1,5 @@
 {
-  "type": "xwalk",
+  "type": "da",
   "libraryUrl": "https://main--ise-boilerplate--aemdemos.aem.page/docs/library/blocks.json",
   "contentHostUrl": "https://content.da.live/aemdemos/summit-dsm/"
 }

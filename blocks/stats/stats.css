@@ -1,8 +1,14 @@
 /* Stats block — stat cards with large numbers and counter animation */
 
-/* Section-level background */
+/* Section-level: full-width background, wider content area to match source */
 main .stats-container {
   background-color: var(--background-color);
+}
+
+/* Override the default section max-width — stats goes full-width like source */
+main > .section.stats-container > div:not(.bg-image) {
+  max-width: 1500px;
+  padding: 0 15px;
 }
 
 /* Block wrapper */
@@ -115,7 +121,7 @@ main .stats > div:not(.stats-header, .stats-cards) {
   main .stats .stats-header h2 {
     font-size: 85px;
     line-height: 0.98;
-    max-width: 70%;
+    max-width: 80%;
   }
 
   main .stats .stats-header a {
@@ -123,13 +129,14 @@ main .stats > div:not(.stats-header, .stats-cards) {
   }
 
   main .stats .stats-cards {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 402px);
     gap: 11px;
   }
 
   main .stats .stats-cards > div {
-    min-height: 200px;
-    padding: 1.2em;
+    box-sizing: border-box;
+    height: 251px;
+    padding: 24px 20px 34px;
   }
 
   main .stats .stats-cards h1 {

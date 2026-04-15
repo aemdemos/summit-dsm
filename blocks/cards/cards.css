@@ -171,13 +171,9 @@ main > .section.cards-container > div:not(.bg-image) {
   text-decoration: underline;
 }
 
-@media (width >= 900px) {
+@media (width >= 600px) {
   .cards > ul {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .cards .cards-card-body h3 {
-    font-size: 40px;
   }
 
   .cards.case-study > ul {
@@ -187,5 +183,11 @@ main > .section.cards-container > div:not(.bg-image) {
 
   .cards.case-study > ul > li {
     flex: 1;
+  }
+}
+
+@media (width >= 900px) {
+  .cards .cards-card-body h3 {
+    font-size: 40px;
   }
 }

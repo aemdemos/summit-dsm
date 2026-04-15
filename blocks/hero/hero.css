@@ -1,13 +1,16 @@
 @import url('./hero-tokens.css');
 
-.hero-container {
+/* Full-bleed hero: override all global section constraints */
+main > .section.hero-container {
   padding: 0;
+  margin: 0;
   margin-top: calc(-1 * var(--header-height));
 }
 
-.hero-container .hero-wrapper {
+main > .section.hero-container > div:not(.bg-image) {
   max-width: unset;
   padding: 0;
+  margin: 0;
 }
 
 .hero {

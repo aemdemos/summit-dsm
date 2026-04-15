@@ -7,6 +7,12 @@ header .nav-wrapper {
   z-index: 10;
   position: fixed;
   padding-top: var(--header-top-padding);
+  transition: background-color 0.3s ease, padding-top 0.3s ease;
+}
+
+header .nav-wrapper.nav-scrolled {
+  background-color: #000;
+  padding-top: 0;
 }
 
 header nav {

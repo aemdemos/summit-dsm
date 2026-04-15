@@ -36,10 +36,26 @@
   line-height: 1.5;
 }
 
-.cards .cards-card-body a {
-  color: var(--accent-color);
-  font-weight: 600;
-  text-transform: lowercase;
+/* CTA button — spans ~88% of card width like source */
+.cards .cards-card-body p:last-child > a:only-child {
+  display: block;
+  width: 88%;
+  box-sizing: border-box;
+  margin: 16px auto 0;
+  background-color: var(--accent-color);
+  color: #006554;
+  border-radius: 300px;
+  padding: 16px 40px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cards .cards-card-body p:last-child > a:only-child:hover {
+  background-color: var(--link-hover-color);
+  color: #004d3f;
 }
 
 .cards .cards-card-image {

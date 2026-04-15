@@ -39,16 +39,15 @@
   font-size: clamp(40px, 6.5vw, 94px);
 }
 
-/* The <em> inside h2 gets decorative bracket corners —
-   only when em is the ONLY child of h2 (full-heading italic pattern) */
-.columns h2 .bracketed > em {
+/* The <em> inside bracketed h2 gets decorative corner brackets — not italic */
+.columns h2.bracketed > em {
   display: inline-block;
   position: relative;
   padding: 0 40px;
-  font-style: italic;
+  font-style: normal;
 }
 
-.columns h2 .bracketed > em::before {
+.columns h2.bracketed > em::before {
   content: "";
   display: block;
   position: absolute;
@@ -60,7 +59,7 @@
   border-left: 3px solid #f9fbf2;
 }
 
-.columns h2 .bracketed > em::after {
+.columns h2.bracketed > em::after {
   content: "";
   display: block;
   position: absolute;

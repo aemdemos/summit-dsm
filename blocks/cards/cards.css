@@ -9,34 +9,67 @@
   gap: var(--cards-grid-gap);
 }
 
+/* Each card: image as background, content overlaid */
 .cards > ul > li {
-  border: var(--cards-card-border-width) solid var(--cards-card-border-color);
-  background-color: var(--light-color);
-  border-radius: 12px;
+  position: relative;
+  border-radius: 16px;
   overflow: hidden;
+  background-color: var(--light-color);
 }
 
+/* Image fills the card */
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: var(--cards-image-aspect-ratio);
+  object-fit: var(--cards-image-object-fit);
+  display: block;
+}
+
+/* Card body overlays the image */
 .cards .cards-card-body {
-  margin: var(--cards-card-body-margin);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 30%) 50%, transparent 100%);
+  color: #f9fbf2;
 }
 
+/* Card number (h3: "01", "02", etc.) — top-left */
 .cards .cards-card-body h3 {
-  color: var(--accent-color);
-  font-size: var(--body-font-size-s);
-  margin: 0 0 0.25em;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: var(--heading-font-family);
+  font-size: 40px;
+  font-weight: 500;
+  color: #f9fbf2;
+  margin: 0;
 }
 
+/* Card title (h2: "Live Sports", "Offsite", etc.) */
 .cards .cards-card-body h2 {
-  font-size: var(--heading-font-size-m);
-  margin: 0 0 0.5em;
+  font-size: clamp(40px, 6.5vw, 94px);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.984;
 }
 
+/* Card description */
 .cards .cards-card-body p {
   font-size: var(--body-font-size-s);
   line-height: 1.5;
+  margin: 0.5em 0 0;
 }
 
-/* CTA button — spans ~88% of card width like source */
+/* CTA button — spans ~88% of card width */
 .cards .cards-card-body p:last-child > a:only-child {
   display: block;
   width: 88%;
@@ -58,18 +91,13 @@
   color: #004d3f;
 }
 
-.cards .cards-card-image {
-  line-height: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: var(--cards-image-aspect-ratio);
-  object-fit: var(--cards-image-object-fit);
-}
-
 @media (width >= 900px) {
   .cards > ul {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards > ul > li img {
+    aspect-ratio: auto;
+    min-height: 500px;
   }
 }

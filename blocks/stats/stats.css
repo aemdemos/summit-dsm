@@ -11,9 +11,9 @@ main > .section.stats-container > div:not(.bg-image) {
   padding: 0 4vw;
 }
 
-/* Section vertical spacing matching source */
+/* Section vertical spacing — large gap below hero to match source */
 main > .section.stats-container {
-  padding-top: 79px;
+  padding-top: 140px;
   padding-bottom: 42px;
 }
 
@@ -125,7 +125,7 @@ main .stats > div:not(.stats-header, .stats-cards) {
 @media (width >= 900px) {
   main .stats .stats-header {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     gap: 16px;
   }
 

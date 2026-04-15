@@ -16,6 +16,11 @@
   color: var(--text-color);
 }
 
+.hero > div {
+  position: relative;
+  z-index: 2;
+}
+
 .hero h1 {
   max-width: var(--hero-heading-max-width);
   margin-left: auto;
@@ -41,7 +46,7 @@
 
 .hero picture {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
   object-fit: cover;
   box-sizing: border-box;
@@ -59,7 +64,8 @@
   position: absolute;
   inset: 0;
   background: rgb(0 0 0 / 40%);
-  z-index: -1;
+  z-index: 1;
+  pointer-events: none;
 }
 
 @media (width >= 900px) {

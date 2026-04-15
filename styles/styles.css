@@ -96,7 +96,7 @@ body.appear {
 }
 
 header {
-  height: var(--header-height);
+  height: 0;
 }
 
 header .header,

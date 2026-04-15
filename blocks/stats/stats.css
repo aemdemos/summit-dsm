@@ -126,11 +126,11 @@ main .stats > div:not(.stats-header, .stats-cards) {
   main .stats .stats-header {
     flex-direction: row;
     align-items: flex-end;
-    gap: 48px;
+    gap: 16px;
   }
 
   main .stats .stats-header h2 {
-    font-size: clamp(60px, 6.5vw, 94px);
+    font-size: clamp(60px, 5.3vw, 77px);
     line-height: 0.984;
     flex: 1;
   }

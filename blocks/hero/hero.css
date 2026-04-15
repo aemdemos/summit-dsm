@@ -37,8 +37,34 @@ main > .section.hero-container > div:not(.bg-image) {
   line-height: 0.89;
 }
 
+/* Decorative bracket effect on em — [ WHERE BRANDS WIN ] */
 .hero h1 em {
   font-style: normal;
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+}
+
+.hero h1 em::before,
+.hero h1 em::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 30px;
+  top: -10px;
+  bottom: -10px;
+  border-top: 3px solid var(--text-color);
+  border-bottom: 3px solid var(--text-color);
+}
+
+.hero h1 em::before {
+  left: 0;
+  border-left: 3px solid var(--text-color);
+}
+
+.hero h1 em::after {
+  right: 0;
+  border-right: 3px solid var(--text-color);
 }
 
 .hero p {

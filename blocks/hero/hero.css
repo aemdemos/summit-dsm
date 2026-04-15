@@ -1,5 +1,10 @@
 @import url('./hero-tokens.css');
 
+.hero-container {
+  padding: 0;
+  margin-top: calc(-1 * var(--header-height));
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;

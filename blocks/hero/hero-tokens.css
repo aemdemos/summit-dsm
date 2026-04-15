@@ -2,6 +2,7 @@
 :root {
   --hero-padding: 80px 24px;
   --hero-padding-desktop: 120px 32px;
-  --hero-min-height: 500px;
+  --hero-min-height: 100vh;
   --hero-heading-max-width: 900px;
+  --hero-overlay-opacity: 0.2;
 }

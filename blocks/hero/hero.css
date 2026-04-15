@@ -70,7 +70,7 @@ main > .section.hero-container > div:not(.bg-image) {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(0 0 0 / 40%);
+  background: rgb(0 0 0 / var(--hero-overlay-opacity));
   z-index: 1;
   pointer-events: none;
 }
@@ -78,6 +78,5 @@ main > .section.hero-container > div:not(.bg-image) {
 @media (width >= 900px) {
   .hero {
     padding: var(--hero-padding-desktop);
-    min-height: 600px;
   }
 }

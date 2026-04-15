@@ -1,9 +1,19 @@
 @import url('./cards-tokens.css');
 
 /* Cards section goes full-width like source (1500px max, 4vw gutters) */
-main > .section > .cards-wrapper {
+main > .section.cards-container > div:not(.bg-image) {
   max-width: 1500px;
   padding: 0 4vw;
+}
+
+/* Eyebrow label ("Solutions") */
+.cards .cards-eyebrow {
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--label-color);
+  font-weight: 600;
+  margin: 0 0 24px;
 }
 
 .cards > ul {

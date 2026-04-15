@@ -5,8 +5,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--cards-grid-min-width), 1fr));
-  gap: var(--cards-grid-gap);
+  grid-template-columns: 1fr;
+  gap: 11px;
 }
 
 /* Each card: image as background, content overlaid */
@@ -14,7 +14,6 @@
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background-color: var(--light-color);
 }
 
 /* Image fills the card */
@@ -24,57 +23,57 @@
 
 .cards > ul > li img {
   width: 100%;
-  aspect-ratio: var(--cards-image-aspect-ratio);
-  object-fit: var(--cards-image-object-fit);
+  aspect-ratio: 686 / 437;
+  object-fit: cover;
   display: block;
 }
 
-/* Card body overlays the image */
+/* Card body overlays the image — no gradient, content positioned absolutely */
 .cards .cards-card-body {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding: 24px;
-  background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 30%) 50%, transparent 100%);
   color: #f9fbf2;
 }
 
-/* Card number (h3: "01", "02", etc.) — top-left */
+/* Card number (h3: "01", "02", etc.) — top area */
 .cards .cards-card-body h3 {
-  position: absolute;
-  top: 24px;
-  left: 24px;
   font-family: var(--heading-font-family);
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 500;
   color: #f9fbf2;
+  text-transform: uppercase;
   margin: 0;
 }
 
-/* Card title (h2: "Live Sports", "Offsite", etc.) */
+/* Card title (h2) */
 .cards .cards-card-body h2 {
+  font-family: var(--heading-font-family);
   font-size: clamp(40px, 6.5vw, 94px);
   font-weight: 500;
   text-transform: uppercase;
-  margin: 0;
   line-height: 0.984;
+  margin: auto 0 0;
+  color: #f9fbf2;
 }
 
 /* Card description */
 .cards .cards-card-body p {
-  font-size: var(--body-font-size-s);
-  line-height: 1.5;
-  margin: 0.5em 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 8px 0 0;
+  color: #f9fbf2;
 }
 
-/* CTA button — spans ~88% of card width */
+/* CTA button — near full card width, at bottom */
 .cards .cards-card-body p:last-child > a:only-child {
   display: block;
   width: 88%;
   box-sizing: border-box;
-  margin: 16px auto 0;
+  margin: auto auto 0;
   background-color: var(--accent-color);
   color: #006554;
   border-radius: 300px;
@@ -96,8 +95,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cards > ul > li img {
-    aspect-ratio: auto;
-    min-height: 500px;
+  .cards .cards-card-body h3 {
+    font-size: 40px;
   }
 }

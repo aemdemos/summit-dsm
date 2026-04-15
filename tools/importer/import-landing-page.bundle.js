@@ -281,31 +281,41 @@ var CustomImportScript = (() => {
 
   // tools/importer/transformers/dicksmedia-sections.js
   function transform2(hookName, element, payload) {
-    if (hookName === "afterTransform") {
-      const { document } = element.ownerDocument ? { document: element.ownerDocument } : { document: element.getRootNode() };
-      const template = payload && payload.template;
-      if (!template || !template.sections || template.sections.length < 2) return;
-      const sections = [...template.sections].reverse();
-      sections.forEach((section, reverseIdx) => {
-        const isFirst = reverseIdx === sections.length - 1;
+    const { document } = element.ownerDocument ? { document: element.ownerDocument } : { document: element.getRootNode() };
+    const template = payload && payload.template;
+    if (!template || !template.sections || template.sections.length < 2) return;
+    if (hookName === "beforeTransform") {
+      template.sections.forEach((section) => {
         const selectorList = Array.isArray(section.selector) ? section.selector : [section.selector];
-        let sectionEl = null;
         for (const sel of selectorList) {
-          sectionEl = element.querySelector(sel);
-          if (sectionEl) break;
+          const sectionEl = element.querySelector(sel);
+          if (sectionEl) {
+            sectionEl.setAttribute("data-section-id", section.id);
+            if (section.style) {
+              sectionEl.setAttribute("data-section-style", section.style);
+            }
+            break;
+          }
         }
-        if (!sectionEl) return;
-        if (section.style) {
+      });
+    }
+    if (hookName === "afterTransform") {
+      const marked = [...element.querySelectorAll("[data-section-id]")];
+      marked.forEach((sectionEl, idx) => {
+        const style = sectionEl.getAttribute("data-section-style");
+        if (style) {
           const metaBlock = WebImporter.Blocks.createBlock(document, {
             name: "Section Metadata",
-            cells: { style: section.style }
+            cells: { style }
           });
           sectionEl.append(metaBlock);
         }
-        if (!isFirst) {
+        if (idx > 0) {
           const hr = document.createElement("hr");
           sectionEl.before(hr);
         }
+        sectionEl.removeAttribute("data-section-id");
+        sectionEl.removeAttribute("data-section-style");
       });
     }
   }

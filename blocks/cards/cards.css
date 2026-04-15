@@ -106,6 +106,71 @@ main > .section.cards-container > div:not(.bg-image) {
   color: #004d3f;
 }
 
+/* Case study variant — horizontal list with small 80×80 logo thumbnails */
+.cards.case-study > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cards.case-study > ul > li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.cards.case-study .cards-card-image {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.cards.case-study > ul > li img {
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  aspect-ratio: auto;
+  object-fit: fill;
+  overflow: clip;
+}
+
+.cards.case-study .cards-card-body {
+  position: static;
+  padding: 0;
+}
+
+.cards.case-study .cards-card-body p {
+  font-weight: 400;
+}
+
+.cards.case-study .cards-card-body p:first-child {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cards.case-study .cards-card-body p:nth-child(2) {
+  font-size: var(--body-font-size-s);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cards.case-study .cards-card-body p:last-child > a:only-child {
+  display: inline;
+  width: auto;
+  margin: 0;
+  background: none;
+  color: var(--accent-color);
+  border-radius: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: var(--body-font-size-s);
+  text-transform: none;
+  text-decoration: underline;
+}
+
 @media (width >= 900px) {
   .cards > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -113,5 +178,14 @@ main > .section.cards-container > div:not(.bg-image) {
 
   .cards .cards-card-body h3 {
     font-size: 40px;
+  }
+
+  .cards.case-study > ul {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .cards.case-study > ul > li {
+    flex: 1;
   }
 }

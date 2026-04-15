@@ -30,6 +30,8 @@ export default function decorate(block) {
     label.className = 'cards-eyebrow';
     label.textContent = 'Solutions';
     block.append(label);
+  } else {
+    block.classList.add('case-study');
   }
 
   block.append(ul);

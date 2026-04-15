@@ -1,57 +1,132 @@
-/* Stats block — stat cards with large numbers */
+/* Stats block — stat cards with large numbers and counter animation */
+
+/* Section-level background */
 main .stats-container {
   background-color: var(--background-color);
 }
 
+/* Block wrapper */
 main .stats {
   color: var(--text-color);
 }
 
-main .stats > div:first-child h2 {
-  font-size: var(--heading-font-size-xl);
-  font-weight: 500;
+/* Top area: heading + CTA as a flex row */
+main .stats .stats-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   margin-bottom: 1.5em;
 }
 
-/* Stat cards layout */
-main .stats > div:not(:first-child, :last-child) {
+main .stats .stats-header h2 {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+  flex: 1;
+}
+
+/* CTA button in header area */
+main .stats .stats-header a {
+  display: inline-block;
   background-color: var(--accent-color);
   color: #006554;
-  border-radius: 12px;
-  padding: 1.5em;
-  margin-bottom: 1em;
+  border-radius: 300px;
+  padding: 0.8em 2em;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-s);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  align-self: flex-start;
 }
 
-main .stats > div:not(:first-child, :last-child) h1 {
+main .stats .stats-header a:hover {
+  background-color: var(--link-hover-color);
+  color: #004d3f;
+}
+
+/* Stat cards grid */
+main .stats .stats-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+}
+
+/* Individual stat card */
+main .stats .stats-cards > div {
+  border-radius: 16px;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 160px;
+}
+
+/* Card color variants */
+main .stats .stats-cards > div:nth-child(1) {
+  background-color: var(--accent-color);
+  color: #000;
+}
+
+main .stats .stats-cards > div:nth-child(2) {
+  background-color: #f9fbf2;
+  color: #000;
+}
+
+main .stats .stats-cards > div:nth-child(3) {
+  background-color: #006554;
+  color: #f9fbf2;
+}
+
+/* Stat value (h1) */
+main .stats .stats-cards h1 {
   font-size: var(--heading-font-size-xxl);
   font-weight: 500;
+  text-transform: uppercase;
   margin: 0;
-  color: #006554;
+  line-height: 1.1;
 }
 
-main .stats > div:not(:first-child, :last-child) p {
-  margin: 0.25em 0 0;
+/* Stat description (p) */
+main .stats .stats-cards p {
+  margin: 0.3em 0 0;
   font-size: var(--body-font-size-s);
+  line-height: 1.4;
 }
 
-/* CTA row */
-main .stats > div:last-child a {
-  color: var(--accent-color);
+/* Hide original undecorated rows (fallback) */
+main .stats > div:not(.stats-header, .stats-cards) {
+  display: none;
 }
 
+/* Desktop layout */
 @media (width >= 900px) {
-  main .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+  main .stats .stats-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2em;
+  }
+
+  main .stats .stats-header h2 {
+    font-size: var(--heading-font-size-xxl);
+    max-width: 70%;
+  }
+
+  main .stats .stats-header a {
+    align-self: center;
+  }
+
+  main .stats .stats-cards {
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5em;
   }
 
-  main .stats > div:first-child {
-    grid-column: 1 / -1;
-  }
-
-  main .stats > div:last-child {
-    grid-column: 1 / -1;
-    text-align: right;
+  main .stats .stats-cards > div {
+    min-height: 200px;
+    padding: 2em;
   }
 }

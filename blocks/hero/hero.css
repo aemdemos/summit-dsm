@@ -79,6 +79,10 @@ main > .section.hero-container > div:not(.bg-image) {
   line-height: 1.3;
 }
 
+.hero .button-container {
+  margin: 1.5em 0 0;
+}
+
 .hero a.button {
   background-color: var(--accent-color);
   color: #006554;
@@ -86,6 +90,18 @@ main > .section.hero-container > div:not(.bg-image) {
   padding: 1em 2.5em;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+/* Scroll-down icon at bottom of hero */
+.hero .hero-scroll-icon {
+  margin-top: 3em;
+}
+
+.hero .hero-scroll-icon img {
+  width: 18px;
+  height: 43px;
+  object-fit: contain;
+  opacity: 0.8;
 }
 
 .hero picture {

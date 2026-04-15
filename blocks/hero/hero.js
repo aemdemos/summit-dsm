@@ -8,6 +8,11 @@ export default async function decorate(block) {
     if (pictureParent && pictureParent.tagName === 'P' && !pictureParent.textContent.trim()) {
       pictureParent.remove();
     }
+    // Set image to eager loading since it's the hero above the fold
+    const img = picture.querySelector('img');
+    if (img) {
+      img.loading = 'eager';
+    }
     // Prepend picture as direct child of the block for absolute positioning via CSS
     block.prepend(picture);
   }

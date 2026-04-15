@@ -1,43 +1,5 @@
-/* Barlow — from Google Fonts (used on dicksmedia.com for body text and buttons) */
-@font-face {
-  font-family: Barlow;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/barlow/v12/7cHpv4kjgoGqM7EPCw.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: Barlow;
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/barlow/v12/7cHqv4kjgoGqM7E30-8s.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: Barlow;
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/barlow/v12/7cHsv4kjgoGqM7E_CfOA5W.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: Barlow;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/barlow/v12/7cHqv4kjgoGqM7E3p-gs.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: Barlow;
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/barlow/v12/7cHsv4kjgoGqM7E_CfP45W.woff2') format('woff2');
-}
+/* Barlow — body text and buttons (matches dicksmedia.com) */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&display=swap');
 
 /*
  * DSGSans — proprietary DICK'S Sporting Goods font.

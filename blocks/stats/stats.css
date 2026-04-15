@@ -24,7 +24,7 @@ main .stats > div:not(:first-child, :last-child) {
 
 main .stats > div:not(:first-child, :last-child) h1 {
   font-size: var(--heading-font-size-xxl);
-  font-weight: 700;
+  font-weight: 500;
   margin: 0;
   color: #006554;
 }

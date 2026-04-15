@@ -41,6 +41,12 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
+  header nav[aria-expanded='true'] {
+    background-color: transparent;
+  }
+}
+
+@media (width >= 900px) {
   header nav {
     display: flex;
     justify-content: space-between;

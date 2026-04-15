@@ -23,4 +23,12 @@ export default function decorate(block) {
       }
     });
   });
+
+  // Mark headings where <em> wraps ALL the text (full-italic bracket pattern)
+  block.querySelectorAll('h2').forEach((h2) => {
+    const em = h2.querySelector(':scope > em');
+    if (em && em.textContent.trim() === h2.textContent.trim()) {
+      h2.classList.add('bracketed');
+    }
+  });
 }

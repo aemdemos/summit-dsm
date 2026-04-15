@@ -1,5 +1,10 @@
 @import url('./columns-tokens.css');
 
+/* Spacing when columns follows another block in the same section */
+.columns {
+  margin-top: 80px;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -21,18 +26,69 @@
   display: block;
 }
 
+/* Heading: uppercase */
 .columns h2 {
-  font-style: italic;
   font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.984;
 }
 
-.columns a.button {
+/* Large font only on headings that have the full-italic bracket pattern */
+.columns h2.bracketed {
+  font-size: clamp(40px, 6.5vw, 94px);
+}
+
+/* The <em> inside h2 gets decorative bracket corners —
+   only when em is the ONLY child of h2 (full-heading italic pattern) */
+.columns h2 .bracketed > em {
+  display: inline-block;
+  position: relative;
+  padding: 0 40px;
+  font-style: italic;
+}
+
+.columns h2 .bracketed > em::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 30px;
+  height: calc(100% + 20px);
+  border-top: 3px solid #f9fbf2;
+  border-left: 3px solid #f9fbf2;
+}
+
+.columns h2 .bracketed > em::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  width: 30px;
+  height: calc(100% + 20px);
+  border-bottom: 3px solid #f9fbf2;
+  border-right: 3px solid #f9fbf2;
+}
+
+/* CTA button — style the link inside columns as a pill button */
+.columns p > a:only-child {
+  display: inline-block;
   background-color: var(--accent-color);
   color: #006554;
   border-radius: 300px;
-  padding: 0.6em 2em;
-  font-weight: 600;
-  text-transform: lowercase;
+  padding: 16px 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  margin-top: 24px;
+}
+
+.columns p > a:only-child:hover {
+  background-color: var(--link-hover-color);
+  color: #004d3f;
 }
 
 @media (width >= 900px) {
@@ -45,5 +101,13 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  /* Text column: vertically center content */
+  .columns > div > div:not(.columns-img-col) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }

@@ -43,9 +43,9 @@
   --max-width-site: 1200px;
 
   /* nav heights */
-  --nav-height: 64px;
+  --nav-height: 80px;
   --breadcrumbs-height: 34px;
-  --header-height: var(--nav-height);
+  --header-height: calc(var(--nav-height) + 20px);
 
   /* fixed-width / code */
   --fixed-font-family: 'Roboto Mono', menlo, consolas, monospace;

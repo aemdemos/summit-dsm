@@ -2,9 +2,9 @@
 
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: transparent;
   width: 100%;
-  z-index: 2;
+  z-index: 10;
   position: fixed;
 }
 
@@ -30,6 +30,7 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+  background-color: #000;
 }
 
 @media (width >= 900px) {
@@ -70,7 +71,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -168,11 +169,12 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
+  font-size: 15px;
+  text-transform: uppercase;
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -243,7 +245,9 @@ header nav .nav-sections ul > li > ul > li {
     width: var(--header-dropdown-width);
     top: 150%;
     padding: var(--header-dropdown-padding);
-    background-color: var(--light-color);
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
     white-space: initial;
     z-index: 1;
   }
@@ -257,7 +261,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid #1a1a1a;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -276,19 +280,21 @@ header nav .nav-tools p {
 
 header nav .nav-tools a.button {
   margin: 0;
-  padding: 0.5em 1.2em;
-  background-color: transparent;
-  border: 2px solid var(--accent-color);
-  color: var(--accent-color);
-  font-size: var(--body-font-size-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding: 16px 40px;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 300px;
+  color: #006554;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 header nav .nav-tools a.button:hover {
-  background-color: var(--accent-color);
-  color: #006554;
+  background-color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
+  color: #004d3f;
 }
 
 /* breadcrumbs */

@@ -46,7 +46,7 @@
 .columns h2.bracketed > em {
   display: inline-block;
   position: relative;
-  padding: 0 40px;
+  padding: 15px 40px;
   font-style: normal;
   max-width: 555px;
 }
@@ -55,10 +55,10 @@
   content: "";
   display: block;
   position: absolute;
-  top: -10px;
+  top: 0;
   left: 0;
   width: 30px;
-  height: calc(100% + 20px);
+  height: 100%;
   border-top: 3px solid #f9fbf2;
   border-left: 3px solid #f9fbf2;
 }
@@ -67,25 +67,27 @@
   content: "";
   display: block;
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   right: 0;
   width: 30px;
-  height: calc(100% + 20px);
+  height: 100%;
   border-bottom: 3px solid #f9fbf2;
   border-right: 3px solid #f9fbf2;
 }
 
-/* Non-bracketed h2 (e.g. "200+ BRAND PARTNERS ...") — smaller, no brackets */
+/* Non-bracketed h2 (e.g. "200+ BRAND PARTNERS ...") — source-matched sizing */
 .columns h2:not(.bracketed) {
-  font-size: var(--heading-font-size-s);
+  font-size: 30px;
+  font-weight: 400;
   line-height: 1.25;
   color: var(--accent-color);
-  margin-top: 16px;
+  margin-top: 0;
 }
 
 .columns h2:not(.bracketed) > em {
   font-style: normal;
-  font-size: var(--body-font-size-xs);
+  font-size: 19px;
+  color: #fff;
   display: block;
 }
 

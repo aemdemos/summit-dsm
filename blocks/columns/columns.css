@@ -48,31 +48,27 @@
 .columns h2.bracketed > em {
   display: inline-block;
   position: relative;
-  padding: 20px 50px;
+  padding: 25px 50px;
   font-style: normal;
   max-width: 555px;
-}
 
-.columns h2.bracketed > em::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 50%;
-  border-top: 3px solid #f9fbf2;
-  border-left: 3px solid #f9fbf2;
-}
+  --bracket-size: 30px;
+  --bracket-color: #f9fbf2;
+  --bracket-width: 3px;
 
-.columns h2.bracketed > em::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  height: 50%;
-  border-bottom: 3px solid #f9fbf2;
-  border-right: 3px solid #f9fbf2;
+  background:
+    /* top-left corner */
+    linear-gradient(var(--bracket-color), var(--bracket-color)) top left / var(--bracket-size) var(--bracket-width) no-repeat,
+    linear-gradient(var(--bracket-color), var(--bracket-color)) top left / var(--bracket-width) var(--bracket-size) no-repeat,
+    /* top-right corner */
+    linear-gradient(var(--bracket-color), var(--bracket-color)) top right / var(--bracket-size) var(--bracket-width) no-repeat,
+    linear-gradient(var(--bracket-color), var(--bracket-color)) top right / var(--bracket-width) var(--bracket-size) no-repeat,
+    /* bottom-left corner */
+    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / var(--bracket-size) var(--bracket-width) no-repeat,
+    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / var(--bracket-width) var(--bracket-size) no-repeat,
+    /* bottom-right corner */
+    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / var(--bracket-size) var(--bracket-width) no-repeat,
+    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / var(--bracket-width) var(--bracket-size) no-repeat;
 }
 
 /* Non-bracketed h2: accent-colored supporting text */

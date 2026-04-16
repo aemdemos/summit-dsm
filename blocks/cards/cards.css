@@ -55,7 +55,7 @@ main > .section.cards-container > div:not(.bg-image) {
   color: #f9fbf2;
 }
 
-/* Card number (h3: "01", "02", etc.) */
+/* Card number (h3: "01", "02", etc.) — pinned to top */
 .cards .cards-card-body h3 {
   font-family: var(--heading-font-family);
   font-size: 28px;
@@ -65,7 +65,7 @@ main > .section.cards-container > div:not(.bg-image) {
   margin: 0;
 }
 
-/* Card title (h2) */
+/* Card title (h2) — centered vertically: auto margin pushes away from h3 */
 .cards .cards-card-body h2 {
   font-family: var(--heading-font-family);
   font-size: clamp(40px, 6.5vw, 94px);
@@ -85,12 +85,17 @@ main > .section.cards-container > div:not(.bg-image) {
   color: #f9fbf2;
 }
 
-/* CTA button — near full card width, at bottom */
+/* CTA button paragraph — auto margin top pushes it to bottom, centering h2+desc */
+.cards .cards-card-body p:last-child {
+  margin-top: auto;
+}
+
+/* CTA button link */
 .cards .cards-card-body p:last-child > a:only-child {
   display: block;
   width: 88%;
   box-sizing: border-box;
-  margin: auto auto 0;
+  margin: 0 auto;
   background-color: var(--accent-color);
   color: #006554;
   border-radius: 300px;

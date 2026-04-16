@@ -77,39 +77,22 @@
   border-right: 3px solid #f9fbf2;
 }
 
-/* Stat heading: "200+" large number with stacked text beside it */
-.columns h2.stat-heading {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  text-align: left;
-  line-height: 1;
-  margin-top: 16px;
-  color: var(--accent-color);
-}
-
-.columns h2.stat-heading .stat-number {
-  font-size: clamp(48px, calc(5.4vw + 16px), 85px);
-  font-weight: 500;
-}
-
-.columns h2.stat-heading .stat-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.columns h2.stat-heading .stat-title {
+/* Non-bracketed h2: accent-colored supporting text */
+.columns h2:not(.bracketed) {
   font-size: 30px;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.2;
+  color: var(--accent-color);
+  margin-top: 16px;
 }
 
-.columns h2.stat-heading .stat-subtitle {
+/* <em> inside non-bracketed h2: smaller subtitle on its own line */
+.columns h2:not(.bracketed) > em {
+  font-style: normal;
   font-size: 19px;
-  font-weight: 400;
-  line-height: 1.2;
   color: #fff;
+  display: block;
+  margin-top: 2px;
 }
 
 /* CTA button — style the link inside columns as a pill button */

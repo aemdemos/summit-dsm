@@ -146,11 +146,12 @@
     object-fit: cover;
   }
 
-  /* Text column: vertically center content */
+  /* Text column: vertically center content, with padding for bracket visibility */
   .columns > div > div:not(.columns-img-col) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 40px 24px;
   }
 }

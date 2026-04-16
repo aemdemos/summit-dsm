@@ -30,28 +30,24 @@
   display: block;
 }
 
-/* Heading: uppercase */
+/* Heading: uppercase, large statement font */
 .columns h2 {
   font-weight: 500;
   text-transform: uppercase;
   text-align: center;
   line-height: 0.984;
-}
-
-/* Large font only on headings that have the full-italic bracket pattern */
-.columns h2.bracketed {
   font-size: clamp(40px, 6.5vw, 94px);
 }
 
-/* The <em> inside bracketed h2 gets decorative corner brackets — not italic */
-.columns h2.bracketed > em {
+/* The <em> inside any columns h2 gets decorative corner brackets — not italic */
+.columns h2 > em {
   display: inline-block;
   position: relative;
   padding: 0 40px;
   font-style: normal;
 }
 
-.columns h2.bracketed > em::before {
+.columns h2 > em::before {
   content: "";
   display: block;
   position: absolute;
@@ -63,7 +59,7 @@
   border-left: 3px solid #f9fbf2;
 }
 
-.columns h2.bracketed > em::after {
+.columns h2 > em::after {
   content: "";
   display: block;
   position: absolute;

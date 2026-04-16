@@ -13,22 +13,14 @@ export default function decorate(block) {
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
+      const pic = col.querySelector('picture') || col.querySelector(':scope > img');
       if (pic) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
+          // picture/image is only content in column
           picWrapper.classList.add('columns-img-col');
         }
       }
     });
-  });
-
-  // Mark headings where <em> wraps ALL the text (full-italic bracket pattern)
-  block.querySelectorAll('h2').forEach((h2) => {
-    const em = h2.querySelector(':scope > em');
-    if (em && em.textContent.trim() === h2.textContent.trim()) {
-      h2.classList.add('bracketed');
-    }
   });
 }

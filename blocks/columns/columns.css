@@ -30,24 +30,27 @@
   display: block;
 }
 
-/* Heading: uppercase, large statement font */
+/* Heading: uppercase */
 .columns h2 {
   font-weight: 500;
   text-transform: uppercase;
   text-align: center;
   line-height: 0.984;
-  font-size: clamp(40px, 6.5vw, 94px);
 }
 
-/* The <em> inside any columns h2 gets decorative corner brackets — not italic */
-.columns h2 > em {
+/* Bracketed h2: large statement font with decorative corner brackets */
+.columns h2.bracketed {
+  font-size: clamp(32px, 4.5vw, 60px);
+}
+
+.columns h2.bracketed > em {
   display: inline-block;
   position: relative;
   padding: 0 40px;
   font-style: normal;
 }
 
-.columns h2 > em::before {
+.columns h2.bracketed > em::before {
   content: "";
   display: block;
   position: absolute;
@@ -59,7 +62,7 @@
   border-left: 3px solid #f9fbf2;
 }
 
-.columns h2 > em::after {
+.columns h2.bracketed > em::after {
   content: "";
   display: block;
   position: absolute;
@@ -69,6 +72,20 @@
   height: calc(100% + 20px);
   border-bottom: 3px solid #f9fbf2;
   border-right: 3px solid #f9fbf2;
+}
+
+/* Non-bracketed h2 (e.g. "200+ BRAND PARTNERS ...") — smaller, no brackets */
+.columns h2:not(.bracketed) {
+  font-size: var(--heading-font-size-s);
+  line-height: 1.25;
+  color: var(--accent-color);
+  margin-top: 16px;
+}
+
+.columns h2:not(.bracketed) > em {
+  font-style: normal;
+  font-size: var(--body-font-size-xs);
+  display: block;
 }
 
 /* CTA button — style the link inside columns as a pill button */
@@ -100,6 +117,11 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  /* Reversed columns: image on the right */
+  .columns.columns-reversed > div {
+    flex-direction: row-reverse;
   }
 
   /* Image column: position relative so image can be absolutely placed */

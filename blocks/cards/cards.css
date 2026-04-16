@@ -1,9 +1,10 @@
 @import url('./cards-tokens.css');
 
-/* Cards section goes full-width like source (1500px max, 4vw gutters) */
+/* Cards section: match source width (686px per card × 2 + 11px gap) */
 main > .section.cards-container > div:not(.bg-image) {
-  max-width: 1500px;
-  padding: 0 4vw;
+  max-width: 1383px;
+  padding: 0 2vw;
+  margin: 0 auto;
 }
 
 /* Eyebrow label ("Solutions") */

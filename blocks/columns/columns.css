@@ -1,5 +1,10 @@
 @import url('./columns-tokens.css');
 
+/* Spacing when columns follows another block in the same section */
+.columns {
+  margin-top: 80px;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -7,6 +12,8 @@
 
 .columns img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .columns > div > div {
@@ -15,29 +22,101 @@
 
 .columns > div > .columns-img-col {
   order: 0;
+  overflow: hidden;
+  max-height: 400px;
 }
 
 .columns > div > .columns-img-col img {
   display: block;
 }
 
+/* Heading: uppercase */
 .columns h2 {
-  font-style: italic;
   font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.984;
 }
 
-.columns a.button {
+/* Bracketed h2: large statement font with decorative corner brackets */
+.columns h2.bracketed {
+  font-size: clamp(40px, calc(5.4vw + 16px), 94px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns h2.bracketed > em {
+  display: inline-block;
+  position: relative;
+  padding: 20px 40px;
+  font-style: normal;
+  max-width: 555px;
+}
+
+.columns h2.bracketed > em::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  border-top: 3px solid #f9fbf2;
+  border-left: 3px solid #f9fbf2;
+}
+
+.columns h2.bracketed > em::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  border-bottom: 3px solid #f9fbf2;
+  border-right: 3px solid #f9fbf2;
+}
+
+/* Non-bracketed h2: accent-colored supporting text */
+.columns h2:not(.bracketed) {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--accent-color);
+  margin-top: 16px;
+}
+
+/* <em> inside non-bracketed h2: smaller subtitle on its own line */
+.columns h2:not(.bracketed) > em {
+  font-style: normal;
+  font-size: 19px;
+  color: #fff;
+  display: block;
+  margin-top: 2px;
+}
+
+/* CTA button — style the link inside columns as a pill button */
+.columns p > a:only-child {
+  display: inline-block;
   background-color: var(--accent-color);
   color: #006554;
   border-radius: 300px;
-  padding: 0.6em 2em;
-  font-weight: 600;
-  text-transform: lowercase;
+  padding: 16px 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  margin-top: 24px;
+}
+
+.columns p > a:only-child:hover {
+  background-color: var(--link-hover-color);
+  color: #004d3f;
 }
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
+    align-items: stretch;
     flex-direction: unset;
     gap: var(--columns-gap);
   }
@@ -45,5 +124,33 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  /* Reversed columns: image on the right */
+  .columns.columns-reversed > div {
+    flex-direction: row-reverse;
+  }
+
+  /* Image column: position relative so image can be absolutely placed */
+  .columns > div > .columns-img-col {
+    position: relative;
+    max-height: none;
+    min-height: 400px;
+  }
+
+  .columns > div > .columns-img-col img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Text column: vertically center content */
+  .columns > div > div:not(.columns-img-col) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }

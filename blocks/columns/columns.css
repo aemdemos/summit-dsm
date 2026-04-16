@@ -40,7 +40,7 @@
 
 /* Bracketed h2: large statement font with decorative corner brackets */
 .columns h2.bracketed {
-  font-size: clamp(32px, 4.5vw, 60px);
+  font-size: clamp(40px, calc(5.4vw + 16px), 94px);
 }
 
 .columns h2.bracketed > em {
@@ -48,6 +48,7 @@
   position: relative;
   padding: 0 40px;
   font-style: normal;
+  max-width: 555px;
 }
 
 .columns h2.bracketed > em::before {

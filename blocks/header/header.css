@@ -301,7 +301,7 @@ header nav .nav-tools a.button {
   color: #006554;
   font-size: 15px;
   font-weight: 700;
-  text-transform: none;
+  text-transform: uppercase;
   letter-spacing: normal;
 }
 

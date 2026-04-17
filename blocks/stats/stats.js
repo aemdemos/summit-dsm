@@ -60,8 +60,9 @@ export default async function decorate(block) {
 
   const ctaLink = ctaRow.querySelector('a');
   if (ctaLink) {
-    // Remove any button class so we style it ourselves
-    ctaLink.classList.remove('button', 'primary', 'secondary');
+    ctaLink.textContent = ctaLink.textContent.trim().toUpperCase();
+    ctaLink.classList.remove('primary', 'secondary');
+    ctaLink.classList.add('button');
     header.appendChild(ctaLink);
   }
 
@@ -90,14 +91,17 @@ export default async function decorate(block) {
         });
       }
     }
+    if (h1 && p) {
+      const spacer = document.createElement('div');
+      spacer.className = 'stats-card-spacer';
+      spacer.setAttribute('aria-hidden', 'true');
+      card.appendChild(spacer);
+    }
     if (p) card.appendChild(p);
     cardsContainer.appendChild(card);
   });
 
-  // Clear block and rebuild
-  block.textContent = '';
-  block.appendChild(header);
-  block.appendChild(cardsContainer);
+  block.replaceChildren(header, cardsContainer);
 
   // Observe for viewport entry to trigger counter animation
   if (counterTargets.length > 0) {

@@ -10,77 +10,121 @@
   flex-direction: column;
 }
 
-.columns img {
+.columns > div > div {
+  order: 1;
+}
+
+/* Image tile: filled box at every viewport so photo doesn’t letterbox on black */
+.columns > div > .columns-img-col {
+  order: 0;
+  overflow: hidden;
+  position: relative;
+  max-height: 400px;
+  min-height: 280px;
+  border-radius: 10px;
+}
+
+.columns > div > .columns-img-col picture {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.columns > div > .columns-img-col img {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.columns > div > div {
-  order: 1;
-}
-
-.columns > div > .columns-img-col {
-  order: 0;
-  overflow: hidden;
-  max-height: 400px;
-}
-
-.columns > div > .columns-img-col img {
-  display: block;
-}
-
-/* Heading: uppercase */
+/* Heading baseline — comps use all-caps stack in column blocks */
 .columns h2 {
+  font-family: var(--heading-font-family);
   font-weight: 500;
-  text-transform: uppercase;
   text-align: center;
-  line-height: 0.984;
+  line-height: 1.15;
+  text-transform: uppercase;
 }
 
-/* Bracketed h2: large statement font with decorative corner brackets */
+/* Full-<em> headline: source comp — condensed display caps + true [ ] rails */
 .columns h2.bracketed {
-  font-size: clamp(40px, calc(5.4vw + 16px), 94px);
-  margin-top: 0;
-  margin-bottom: 0;
+  font-family: var(--heading-font-family);
+  font-size: clamp(26px, calc(3.2vw + 10px), 68px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+  margin: 0;
 }
 
 .columns h2.bracketed > em {
   display: inline-block;
   position: relative;
-  padding: 25px 50px;
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 2rem 3.25rem;
+  font-family: inherit;
+  font-size: 1em;
   font-style: normal;
-  max-width: 555px;
-
-  --bracket-size: 30px;
-  --bracket-color: #f9fbf2;
-  --bracket-width: 3px;
-
-  background:
-    /* top-left corner */
-    linear-gradient(var(--bracket-color), var(--bracket-color)) top left / var(--bracket-size) var(--bracket-width) no-repeat,
-    linear-gradient(var(--bracket-color), var(--bracket-color)) top left / var(--bracket-width) var(--bracket-size) no-repeat,
-    /* top-right corner */
-    linear-gradient(var(--bracket-color), var(--bracket-color)) top right / var(--bracket-size) var(--bracket-width) no-repeat,
-    linear-gradient(var(--bracket-color), var(--bracket-color)) top right / var(--bracket-width) var(--bracket-size) no-repeat,
-    /* bottom-left corner */
-    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / var(--bracket-size) var(--bracket-width) no-repeat,
-    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom left / var(--bracket-width) var(--bracket-size) no-repeat,
-    /* bottom-right corner */
-    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / var(--bracket-size) var(--bracket-width) no-repeat,
-    linear-gradient(var(--bracket-color), var(--bracket-color)) bottom right / var(--bracket-width) var(--bracket-size) no-repeat;
+  font-synthesis: none;
+  font-weight: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  color: inherit;
+  hyphens: manual;
+  overflow-wrap: normal;
 }
 
-/* Non-bracketed h2: accent-colored supporting text */
+/* One design-comp row per span — no soft-wrap between words on the same line */
+.columns h2.bracketed > em .columns-headline-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* [ and ] from borders — vertical rail + short top/bottom caps (matches comp) */
+.columns h2.bracketed > em::before,
+.columns h2.bracketed > em::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  box-sizing: border-box;
+  pointer-events: none;
+  border-color: var(--text-color);
+  border-style: solid;
+  border-width: 0;
+}
+
+.columns h2.bracketed > em::before {
+  left: 0;
+  border-left-width: 3px;
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+}
+
+.columns h2.bracketed > em::after {
+  right: 0;
+  border-right-width: 3px;
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+}
+
+/* Compound headline: accent line + smaller <em> subtitle */
 .columns h2:not(.bracketed) {
+  font-family: var(--heading-font-family);
   font-size: 30px;
   font-weight: 400;
   line-height: 1.2;
   color: var(--accent-color);
   margin-top: 16px;
+  text-transform: uppercase;
 }
 
-/* <em> inside non-bracketed h2: smaller subtitle on its own line */
 .columns h2:not(.bracketed) > em {
   font-style: normal;
   font-size: 19px;
@@ -89,23 +133,39 @@
   margin-top: 2px;
 }
 
-/* CTA button — style the link inside columns as a pill button */
+/* CTA — comp: compact pill, centered under headline */
 .columns p > a:only-child {
   display: inline-block;
-  background-color: var(--accent-color);
-  color: #006554;
+  margin-top: 2rem;
+  padding: 0.85em 2.25em;
   border-radius: 300px;
-  padding: 16px 40px;
+  background-color: var(--accent-color);
+  color: #0a0a0a;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: var(--body-font-size-s);
+  letter-spacing: 0.06em;
   text-decoration: none;
-  margin-top: 24px;
+  text-transform: uppercase;
 }
 
 .columns p > a:only-child:hover {
   background-color: var(--link-hover-color);
   color: #004d3f;
+}
+
+/* Text column: keep headline + CTA centered at every viewport (not only desktop row layout) */
+.columns > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.columns > div > div:not(.columns-img-col) p {
+  text-align: center;
 }
 
 @media (width >= 900px) {
@@ -125,26 +185,13 @@
     flex-direction: row-reverse;
   }
 
-  /* Image column: position relative so image can be absolutely placed */
   .columns > div > .columns-img-col {
-    position: relative;
     max-height: 600px;
     min-height: 400px;
   }
 
-  .columns > div > .columns-img-col img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   /* Text column: vertically center content */
   .columns > div > div:not(.columns-img-col) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     padding: 40px 32px;
   }

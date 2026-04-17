@@ -1,85 +1,112 @@
-/* Stats block — matches source dicksmedia.com section#counter */
+/*
+ * Squarespace (dicksmedia.com): .content-wrapper > .content > [data-fluid-engine]
+ * fills the section band; the grid (.fe-68402ced…) uses --container-width, 11px gaps,
+ * 6% tile padding, 16px radius. Do not add a second max-width on .stats — that is not
+ * in .content and skews scale vs the source.
+ */
 
-/* Section-level background */
 main .stats-container {
   background-color: var(--background-color);
 }
 
-/* Full-width section like source — content centered with fluid gutters */
+/* Parent column ~= .content band (narrower than 1500px sqs max) */
 main > .section.stats-container > div:not(.bg-image) {
-  max-width: 1500px;
+  max-width: 1410px;
   padding: 0 4vw;
 }
 
-/* Section vertical spacing — large gap below hero to match source */
 main > .section.stats-container {
   padding-top: 140px;
   padding-bottom: 42px;
 }
 
-/* Block wrapper */
 main .stats {
+  /* Mirrors --container-width; capped with section inner max */
+  --sqs-content-width: min(1410px, calc(100vw - 4vw * 2));
+  --sqs-fluid-gap: 11px;
+  --stats-caption-lift: 70px;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
   color: var(--text-color);
 }
 
-/* Header: heading + CTA */
+main .stats :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  margin-block: 0;
+}
+
 main .stats .stats-header {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  margin-bottom: 48px;
+  gap: 1rem;
+  margin-bottom: clamp(48px, 5vw, 60px);
 }
 
 main .stats .stats-header h2 {
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-xl);
   font-weight: 500;
   line-height: 0.984;
   text-transform: uppercase;
   color: #f9fbf2;
-  margin: 0;
+  font-size: clamp(1.75rem, 0.5rem + 5vw, 4.75rem);
 }
 
-/* CTA button */
-main .stats .stats-header a {
+/* Pill matches header nav .nav-tools a.button */
+main .stats .stats-header a.button {
+  box-sizing: border-box;
   display: inline-block;
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #006554;
-  background-color: #63ffcb;
-  border-radius: 300px;
+  margin: 0;
+  max-width: 100%;
   padding: 16px 40px;
+  border: 1px solid var(--accent-color);
+  border-radius: 300px;
+  font-family: var(--body-font-family);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #006554;
+  background-color: var(--accent-color);
+  cursor: pointer;
   align-self: flex-start;
 }
 
-main .stats .stats-header a:hover {
-  background-color: var(--link-hover-color);
+main .stats .stats-header a.button:hover,
+main .stats .stats-header a.button:focus {
+  text-decoration: none;
   color: #004d3f;
+  background-color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
 }
 
-/* Cards grid — fluid, fills available width */
 main .stats .stats-cards {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 11px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sqs-fluid-gap);
 }
 
-/* Individual card */
 main .stats .stats-cards > div {
   box-sizing: border-box;
-  border-radius: 16px;
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 16px;
+  padding: 6%;
   min-height: 200px;
+  min-width: 0;
+  overflow: hidden;
 }
 
-/* Card colors */
 main .stats .stats-cards > div:nth-child(1) {
   background-color: #63ffcb;
   color: #000;
@@ -92,65 +119,79 @@ main .stats .stats-cards > div:nth-child(2) {
 
 main .stats .stats-cards > div:nth-child(3) {
   background-color: #006554;
-  color: #f9fbf2;
+  color: #63ffcb;
 }
 
-/* Stat value (h1) */
+main .stats .stats-cards > div:nth-child(3) h1,
+main .stats .stats-cards > div:nth-child(3) p,
+main .stats .stats-cards > div:nth-child(3) a {
+  color: #63ffcb;
+}
+
+main .stats .stats-cards > div:nth-child(1) a,
+main .stats .stats-cards > div:nth-child(2) a {
+  color: inherit;
+}
+
 main .stats .stats-cards h1 {
+  flex: 0 0 auto;
   font-family: var(--heading-font-family);
-  font-size: 48px;
   font-weight: 500;
-  line-height: 0.888;
+  line-height: 0.92;
   text-transform: uppercase;
   color: inherit;
+  font-size: clamp(calc(2.75rem + 36px), calc(1.5rem + 5.5vw + 36px), calc(4.75rem + 36px));
   margin: 0;
 }
 
-/* Stat description (p) */
+main .stats .stats-card-spacer {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  margin-bottom: calc(-1 * var(--stats-caption-lift));
+}
+
 main .stats .stats-cards p {
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.3;
-  color: inherit;
+  flex: 0 0 auto;
   margin: 0;
+  margin-block: 0;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  line-height: 1.32;
+  color: inherit;
+  font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.0625rem);
 }
 
-/* Hide original undecorated rows */
 main .stats > div:not(.stats-header, .stats-cards) {
   display: none;
 }
 
-/* Desktop */
 @media (width >= 900px) {
   main .stats .stats-header {
     flex-direction: row;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
   }
 
   main .stats .stats-header h2 {
-    font-size: clamp(60px, 5.3vw, 77px);
-    line-height: 0.984;
     flex: 1;
+    font-size: clamp(3.25rem, 1.5rem + 5vw, 4.8125rem);
   }
 
-  main .stats .stats-header a {
+  main .stats .stats-header a.button {
     flex-shrink: 0;
-    align-self: auto;
+    align-self: center;
   }
 
   main .stats .stats-cards {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   main .stats .stats-cards > div {
-    min-height: clamp(200px, 19vw, 274px);
-    padding: 24px 24px 34px;
-  }
+    --stats-tile-height: calc(7 * var(--sqs-content-width) * 0.0215 + 6 * var(--sqs-fluid-gap));
 
-  main .stats .stats-cards h1 {
-    font-size: clamp(80px, 8vw, 128px);
-    line-height: 0.888;
+    height: var(--stats-tile-height);
+    min-height: var(--stats-tile-height);
+    max-height: var(--stats-tile-height);
   }
 }

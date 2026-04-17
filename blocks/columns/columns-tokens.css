@@ -2,3 +2,10 @@
 :root {
   --columns-gap: 24px;
 }
+
+@media (width >= 900px) {
+  :root {
+    /* comp: clear gutter between photo and headline column */
+    --columns-gap: 40px;
+  }
+}

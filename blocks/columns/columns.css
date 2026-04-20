@@ -2,7 +2,7 @@
 
 /* Spacing when columns follows another block in the same section */
 .columns {
-  margin-top: 80px;
+  margin-top: clamp(48px, 6vw, 72px);
 }
 
 .columns > div {
@@ -14,14 +14,38 @@
   order: 1;
 }
 
-/* Image tile: filled box at every viewport so photo doesn’t letterbox on black */
+/* Image tile — aspect + object-fit match dicksmedia.com fluid image block */
 .columns > div > .columns-img-col {
   order: 0;
   overflow: hidden;
   position: relative;
-  max-height: 400px;
-  min-height: 280px;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: var(--columns-image-aspect-w) / var(--columns-image-aspect-h);
   border-radius: 10px;
+  background-color: var(--background-color);
+}
+
+/*
+ * Legacy CTA — match Squarespace fluid block .fe-block-e597a85e0e4d23c6e9b3 (inside fe-684b206…):
+ * image frame 2200×2000; .sqs-block { justify-content: center }; .sqs-block-alignment-wrapper { align-items: center }.
+ */
+.columns.columns-legacy > div {
+  gap: var(--columns-legacy-grid-gap);
+}
+
+.columns.columns-legacy > div > .columns-img-col {
+  aspect-ratio: var(--columns-legacy-image-frame-aspect-w) / var(--columns-legacy-image-frame-aspect-h);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.columns.columns-legacy > div > .columns-img-col img {
+  object-position: var(--columns-legacy-image-object-position);
 }
 
 .columns > div > .columns-img-col picture {
@@ -37,6 +61,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+}
+
+.columns.promo > div {
+  gap: var(--columns-promo-gap);
+}
+
+.columns.promo > div > .columns-img-col {
+  aspect-ratio: var(--columns-promo-image-aspect-w) / var(--columns-promo-image-aspect-h);
+  border-radius: var(--columns-promo-image-radius);
+}
+
+.columns.promo > div > .columns-img-col img {
+  object-position: var(--columns-promo-image-object-position);
 }
 
 /* Heading baseline — comps use all-caps stack in column blocks */
@@ -48,17 +86,22 @@
   text-transform: uppercase;
 }
 
-/* Full-<em> headline: source comp — condensed display caps + true [ ] rails */
+/* Full-<em> headline: condensed display caps + true [ ] rails */
 .columns h2.bracketed {
   font-family: var(--heading-font-family);
-  font-size: clamp(26px, calc(3.2vw + 10px), 68px);
+  font-size: clamp(
+    var(--columns-bracketed-h2-size-min, 1.6rem),
+    var(--columns-bracketed-h2-size-fluid, calc(3.55vw + 0.85rem)),
+    var(--columns-bracketed-h2-size-max, 4.2rem)
+  );
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1;
   letter-spacing: 0.05em;
   color: var(--text-color);
   margin: 0;
 }
 
+/* <em> — same as source `.html-block h2 em` (dicksmedia custom.css) */
 .columns h2.bracketed > em {
   display: inline-block;
   position: relative;
@@ -66,7 +109,7 @@
   width: fit-content;
   max-width: 100%;
   margin: 0;
-  padding: 2rem 3.25rem;
+  padding: var(--columns-bracket-em-padding-block, 0) var(--columns-bracket-em-padding-inline, 12px);
   font-family: inherit;
   font-size: 1em;
   font-style: normal;
@@ -85,55 +128,177 @@
   white-space: nowrap;
 }
 
-/* [ and ] from borders — vertical rail + short top/bottom caps (matches comp) */
+/* [ ] — same as source `.html-block h2 em::before/::after` (open side faces copy) */
 .columns h2.bracketed > em::before,
 .columns h2.bracketed > em::after {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 14px;
+  top: var(--columns-bracket-rail-offset-y, -10px);
+  bottom: var(--columns-bracket-rail-offset-y, -10px);
+  width: var(--columns-bracket-rail-width, 20px);
   box-sizing: border-box;
   pointer-events: none;
-  border-color: var(--text-color);
-  border-style: solid;
-  border-width: 0;
+  border: var(--columns-bracket-border, 3px solid currentcolor);
 }
 
 .columns h2.bracketed > em::before {
   left: 0;
-  border-left-width: 3px;
-  border-top-width: 3px;
-  border-bottom-width: 3px;
+  border-right-width: 0;
 }
 
 .columns h2.bracketed > em::after {
   right: 0;
-  border-right-width: 3px;
-  border-top-width: 3px;
-  border-bottom-width: 3px;
+  border-left-width: 0;
 }
 
-/* Compound headline: accent line + smaller <em> subtitle */
-.columns h2:not(.bracketed) {
+/* Legacy headline: source <h2> had inline `text-align:center; white-space:pre-wrap` */
+.columns.columns-legacy h2.bracketed {
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* Compound headline: mint primary + secondary line (not bracket / not promo brand line) */
+.columns h2:not(.bracketed, .columns-brand-headline) {
   font-family: var(--heading-font-family);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
   color: var(--accent-color);
-  margin-top: 16px;
+  margin-top: clamp(20px, 3vw, 32px);
   text-transform: uppercase;
 }
 
-.columns h2:not(.bracketed) > em {
+.columns h2:not(.bracketed, .columns-brand-headline) > em {
   font-style: normal;
-  font-size: 19px;
-  color: #fff;
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-weight: 500;
+  color: var(--text-color);
   display: block;
-  margin-top: 2px;
+  margin-top: 6px;
+  letter-spacing: 0.04em;
 }
 
-/* CTA — comp: compact pill, centered under headline */
+/* Squarespace export: sqsrte-text-color--accent (fe-block-yui…); scoped to .columns.promo */
+/* stylelint-disable-next-line selector-class-pattern -- upstream class name from source site */
+.columns.promo .sqsrte-text-color--accent {
+  color: var(--accent-color);
+}
+
+/*
+ * Promo brand block — condensed `200`+; row + three-line stack centered in column;
+ * lines share one left edge; mid row is flex so “ACROSS” pill lines up with BRAND / FROM.
+ */
+.columns.promo h2.columns-brand-headline {
+  margin: clamp(14px, 2.5vw, 22px) 0 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: var(--heading-font-family);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-row {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  column-gap: clamp(4px, 0.75vw, 12px);
+  max-width: 100%;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-num {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  font-size: var(--columns-brand-figures-size);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-figures {
+  display: inline-block;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-plus {
+  display: inline-block;
+  margin-inline-start: 0.02em;
+  margin-top: 0.14em;
+  font-size: 0.44em;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  min-width: 0;
+  padding-block: 0.06em;
+  text-align: left;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-line {
+  display: block;
+  width: 100%;
+  font-size: clamp(11px, 1.25vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Mid line: pill + “EVERY INDUSTRY” share baseline with lines above/below (same inset as stack) */
+.columns.promo h2.columns-brand-headline .columns-brand-line-mid {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 0.22em;
+  width: 100%;
+  text-align: left;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-line-tight + .columns-brand-line-tight {
+  margin-top: 0.08em;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-line-secondary {
+  color: var(--columns-heading-color);
+  font-weight: 500;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-across-pill {
+  flex: 0 0 auto;
+
+  /* No left padding — “A” must align with “B” / “F” on adjacent lines */
+  padding: 0.06em 0.28em 0.05em 0;
+  border-radius: 0 3px 3px 0;
+  background-color: var(--columns-brand-across-highlight-bg);
+  color: var(--columns-heading-color);
+  font-weight: 600;
+  letter-spacing: inherit;
+}
+
+.columns.promo h2.columns-brand-headline .columns-brand-mid-rest {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 500;
+  letter-spacing: inherit;
+  text-align: left;
+}
+
+@media (width <= 599px) {
+  .columns.promo h2.columns-brand-headline .columns-brand-line {
+    white-space: normal;
+  }
+}
+
+/* CTA — default: solid accent; promo: gradient pill */
 .columns p > a:only-child {
   display: inline-block;
   margin-top: 2rem;
@@ -154,11 +319,23 @@
   color: #004d3f;
 }
 
+.columns.promo p > a:only-child {
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  background: var(--columns-cta-gradient);
+}
+
+.columns.promo p > a:only-child:hover {
+  filter: brightness(0.92);
+  background-color: transparent;
+  color: #0a0a0a;
+}
+
 /* Text column: keep headline + CTA centered at every viewport (not only desktop row layout) */
 .columns > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
@@ -168,15 +345,40 @@
   text-align: center;
 }
 
+/* Promo copy column — centered; desktop: brand block margin-top auto toward bottom */
+.columns.promo h2.bracketed {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: var(--columns-heading-color);
+  display: flex;
+  justify-content: center;
+}
+
+.columns.promo h2:not(.bracketed, .columns-brand-headline) > em {
+  color: var(--columns-heading-color);
+}
+
+.columns.promo > div > div:not(.columns-img-col) {
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background-color: var(--columns-copy-bg);
+  padding: clamp(32px, 8vw, 48px) clamp(20px, 5vw, 36px);
+}
+
 @media (width >= 900px) {
   .columns > div {
-    align-items: stretch;
     flex-direction: unset;
+    align-items: center;
+    justify-content: flex-start;
     gap: var(--columns-gap);
   }
 
+  /* Default: flexible copy + capped image width */
   .columns > div > div {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     order: unset;
   }
 
@@ -186,13 +388,65 @@
   }
 
   .columns > div > .columns-img-col {
-    max-height: 600px;
-    min-height: 400px;
+    flex: 0 0 auto;
+    width: min(var(--columns-image-col-max-width), var(--columns-image-col-width-pct));
+    max-width: 100%;
   }
 
-  /* Text column: vertically center content */
+  .columns:not(.columns-reversed) > div > .columns-img-col {
+    margin-inline-start: var(--columns-image-inline-nudge);
+  }
+
+  /* Legacy: fe-684b206… symmetric gutters — no extra image nudge */
+  .columns.columns-legacy:not(.columns-reversed) > div > .columns-img-col {
+    margin-inline-start: 0;
+  }
+
+  /* Legacy: 12:10 flex ≈ .fe-block-e597a85e… grid-area (12 cols) vs copy (~10 cols) */
+  .columns.columns-legacy > div > .columns-img-col {
+    flex: var(--columns-legacy-image-flex) 1 0;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .columns.columns-legacy > div > div:not(.columns-img-col) {
+    flex: var(--columns-legacy-copy-flex) 1 0;
+    min-width: 0;
+  }
+
+  /* Promo: flex split from fe-6840331… then widened image column (tokens), no nudge */
+  .columns.promo:not(.columns-reversed) > div > .columns-img-col {
+    margin-inline-start: 0;
+  }
+
+  .columns.promo > div > .columns-img-col {
+    flex: var(--columns-promo-image-flex) 1 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .columns.promo > div {
+    align-items: stretch;
+    gap: var(--columns-promo-gap);
+  }
+
+  /* Copy column padding */
   .columns > div > div:not(.columns-img-col) {
     justify-content: center;
-    padding: 40px 32px;
+    padding: 32px 24px 40px;
+  }
+
+  .columns.promo > div > div:not(.columns-img-col) {
+    flex: var(--columns-promo-copy-flex) 1 0;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: clamp(28px, 5vw, 56px) clamp(22px, 3.5vw, 40px) clamp(32px, 5vw, 56px);
+  }
+
+  /* Brand stat sits low in the pane (fluid-engine stacks headline high, stat + CTA lower) */
+  .columns.promo h2.columns-brand-headline {
+    margin-top: auto;
+    margin-bottom: 0;
   }
 }

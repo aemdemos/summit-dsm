@@ -47,6 +47,7 @@ main > .section.hero-container > div:not(.bg-image) {
   display: inline-block;
   padding: 0 40px;
   white-space: nowrap;
+  transform: translateY(var(--hero-bracket-offset-y));
 }
 
 .hero h1 em::before,
@@ -69,6 +70,12 @@ main > .section.hero-container > div:not(.bg-image) {
 .hero h1 em::after {
   right: 0;
   border-right: 3px solid var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 em {
+    transform: none;
+  }
 }
 
 .hero p {
@@ -98,14 +105,17 @@ main > .section.hero-container > div:not(.bg-image) {
 
 /* Scroll-down icon at bottom of hero */
 .hero .hero-scroll-icon {
-  margin-top: 3em;
+  margin-top: var(--hero-scroll-icon-margin-top);
+  display: flex;
+  justify-content: center;
 }
 
 .hero .hero-scroll-icon img {
-  width: 18px;
-  height: 43px;
+  display: block;
+  width: var(--hero-scroll-icon-width);
+  height: auto;
+  aspect-ratio: 50 / 122;
   object-fit: contain;
-  opacity: 0.8;
 }
 
 .hero picture {
@@ -116,7 +126,8 @@ main > .section.hero-container > div:not(.bg-image) {
   box-sizing: border-box;
 }
 
-.hero img {
+/* Background only — not the scroll cue in .hero-scroll-icon */
+.hero > picture img {
   object-fit: cover;
   width: 100%;
   height: 100%;

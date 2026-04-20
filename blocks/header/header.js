@@ -60,8 +60,9 @@ function focusNavSection() {
  */
 function toggleAllNavSections(sections, expanded = false) {
   if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
+  const value = typeof expanded === 'string' ? expanded : String(expanded);
+  sections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', value);
   });
 }
 
@@ -120,6 +121,36 @@ function getDirectTextContent(menuItem) {
 }
 
 const MAX_BREADCRUMB_DEPTH = 20;
+
+/* eslint-disable-next-line browser-security/no-http-urls, browser-security/detect-mixed-content -- W3C SVG namespace (not fetched) */
+const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+
+/**
+ * Down-arrow marker matching dicksmedia #openArrow (stroke nav color).
+ * @param {Element} link Primary label link inside a folder nav item
+ */
+function appendNavDropIcon(link) {
+  if (!link || link.querySelector('.nav-drop-icon')) return;
+  const wrap = document.createElement('span');
+  wrap.className = 'nav-drop-icon';
+  wrap.setAttribute('aria-hidden', 'true');
+  const svg = document.createElementNS(SVG_NAMESPACE, 'svg');
+  svg.setAttribute('viewBox', '0 0 22 22');
+  svg.setAttribute('width', '1em');
+  svg.setAttribute('height', '1em');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'square');
+  svg.setAttribute('stroke-linejoin', 'miter');
+  const p1 = document.createElementNS(SVG_NAMESPACE, 'path');
+  p1.setAttribute('d', 'M11 18.3591L11 3');
+  const p2 = document.createElementNS(SVG_NAMESPACE, 'path');
+  p2.setAttribute('d', 'M18 11.5L11 18.5L4 11.5');
+  svg.append(p1, p2);
+  wrap.append(svg);
+  link.append(wrap);
+}
 
 async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const crumbs = [];
@@ -205,14 +236,27 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+    navSections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((navSection) => {
+      if (navSection.querySelector('ul')) {
+        navSection.classList.add('nav-drop');
+        const labelLink = navSection.querySelector(':scope > a') || navSection.querySelector(':scope > p > a');
+        appendNavDropIcon(labelLink);
+
+        navSection.addEventListener('mouseenter', () => {
+          if (!isDesktop.matches) return;
+          toggleAllNavSections(navSections, false);
+          navSection.setAttribute('aria-expanded', 'true');
+        });
+        navSection.addEventListener('mouseleave', () => {
+          if (!isDesktop.matches) return;
+          navSection.setAttribute('aria-expanded', 'false');
+        });
+      }
       navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
+        if (isDesktop.matches) return;
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections, false);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
     });
     navSections.querySelectorAll('.button-container').forEach((buttonContainer) => {

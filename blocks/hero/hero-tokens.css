@@ -5,4 +5,13 @@
   --hero-min-height: 700px;
   --hero-heading-max-width: 900px;
   --hero-overlay-opacity: 0.2;
+
+  /* Scroll cue: matches dicksmedia.com hero rendered ~25×61 at 1200px viewport */
+  --hero-scroll-icon-width: clamp(22px, 2.1vw, 26px);
+
+  /* Space below CTA; tuned vs source hero */
+  --hero-scroll-icon-margin-top: calc(3em + 80px);
+
+  /* Nudge the WHERE BRANDS WIN line (em + bracket rails) down within the hero */
+  --hero-bracket-offset-y: 50px;
 }

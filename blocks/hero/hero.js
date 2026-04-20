@@ -30,10 +30,10 @@ export default async function decorate(block) {
     const iconWrapper = document.createElement('div');
     iconWrapper.className = 'hero-scroll-icon';
     const iconImg = document.createElement('img');
-    iconImg.src = '/icons/down-icon.png';
+    iconImg.src = '/icons/down-icon.webp';
     iconImg.alt = '';
-    iconImg.width = 18;
-    iconImg.height = 43;
+    iconImg.width = 50;
+    iconImg.height = 122;
     iconImg.loading = 'lazy';
     iconWrapper.appendChild(iconImg);
     contentDiv.appendChild(iconWrapper);

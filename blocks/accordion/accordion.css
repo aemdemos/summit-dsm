@@ -1,5 +1,53 @@
 @import url('./accordion-tokens.css');
 
+/*
+ * FAQ-only section: extra top padding vs the section above (image / CTA).
+ * Omit when this section also contains “YOUR LEGACY…” columns — that spacing uses the sibling rule below.
+ */
+main > .section:has(.accordion.block):not(:has(#your-legacy-starts-here)) {
+  padding-top: calc(40px + 100px);
+}
+
+/*
+ * Legacy CTA → FAQ: AEM wraps blocks (`columns-wrapper`, `accordion-wrapper`) — `columns + accordion` never matches.
+ * Gap matches dicksmedia: ~82px from legacy fluid (fe-684b206…) to green “FAQS” at 1200px viewport (see drafts/compare/faq-spacing-*.png).
+ */
+main .section .columns-wrapper:has(#your-legacy-starts-here) + .accordion-wrapper,
+main .section .columns:has(#your-legacy-starts-here) + .accordion {
+  margin-top: var(--accordion-after-legacy-columns-margin-top);
+}
+
+/* Same horizontal cap + inset as Solutions / Insights (`blocks/cards/cards.css`). */
+main > .section:has(.accordion.block) > div:not(.bg-image) {
+  max-width: var(--accordion-strip-max-width);
+  padding: 0 2vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/*
+ * FAQ eyebrow — same scale / uppercase rhythm as `.cards .cards-eyebrow` (Solutions / Insights),
+ * color matches dicksmedia FAQ label (accent green, not `.sqsrte-small` yellow).
+ */
+main .accordion > p.accordion-eyebrow,
+main > .section:has(.accordion.block) > .default-content-wrapper > p:first-child {
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  font-weight: 600;
+  margin: 0 0 var(--accordion-faqs-gap-below-eyebrow);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: start;
+}
+
+main .accordion.block {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .accordion > ul {
   list-style: none;
   margin: 0;
@@ -14,7 +62,8 @@
   margin-top: var(--accordion-item-gap);
 }
 
-.accordion p {
+/* Do not target `.accordion-eyebrow` — it must keep its own margin rhythm */
+.accordion .accordion-item-body-inner p {
   margin-bottom: 0.8em;
 }
 
@@ -24,43 +73,85 @@
   padding-right: var(--accordion-label-padding-right);
   cursor: pointer;
   overflow: auto;
-  transition: background-color var(--accordion-transition-duration);
-  font-size: var(--body-font-size-m);
-  font-weight: 500;
+  font-family: var(--heading-font-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-color);
+  transition: color var(--accordion-transition-duration);
+}
+
+/* First question sits closer to “FAQS” than subsequent rows (source rhythm) */
+.accordion > ul > li:first-child .accordion-item-label {
+  padding-top: 0.45em;
 }
 
 .accordion li.active .accordion-item-label {
   background-color: transparent;
+  color: var(--accent-color);
 }
 
-.accordion .accordion-item-label:focus,
-.accordion .accordion-item-label:hover {
-  background-color: var(--light-color);
+.accordion .accordion-item-label:focus {
+  outline: none;
 }
 
-.accordion .accordion-item-label::after {
-  content: '';
+.accordion .accordion-item-label:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Source `custom.css`: no row hover wash — keyboard focus only (above). */
+
+/*
+ * Arrows: dicksmedia `custom.css` — `.accordion-block .accordion-icon-container` uses down/up PNGs (not CSS shapes).
+ * Assets copied from Squarespace static URLs into `/icons/accordion-down.png` and `accordion-up.png`.
+ */
+.accordion .accordion-icon-container {
   position: absolute;
   top: 50%;
   right: var(--accordion-label-icon-right);
-  transform: translateY(-50%) rotate(135deg);
-  width: 8px;
-  height: 8px;
-  border: 2px solid var(--accent-color);
-  border-width: 2px 2px 0 0;
-  transition: transform var(--accordion-transition-duration);
+  width: var(--accordion-icon-display-width);
+  height: var(--accordion-icon-display-height);
+  transform: translateY(-50%);
+  background: url('../../icons/accordion-down.png') no-repeat;
+  background-size: contain;
+  pointer-events: none;
 }
 
-.accordion li.active .accordion-item-label::after {
-  transform: translateY(-50%) rotate(-45deg);
+.accordion li.active .accordion-item-label .accordion-icon-container {
+  background-image: url('../../icons/accordion-up.png');
 }
 
+/* Slide open/closed — `accordion.js` wraps copy in `.accordion-item-body-inner` */
 .accordion .accordion-item-body {
-  display: none;
-  padding: 0 var(--accordion-body-padding-x) 1em;
+  display: grid;
+  grid-template-rows: 0fr;
+  padding: 0;
+  margin: 0;
+  transition: grid-template-rows var(--accordion-expand-duration) ease-out;
 }
 
 .accordion li.active .accordion-item-body {
-  display: block;
-  background-color: transparent;
+  grid-template-rows: 1fr;
+}
+
+.accordion .accordion-item-body-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 var(--accordion-body-padding-x) 1em;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion .accordion-item-body {
+    transition-duration: 0.01ms;
+  }
+
+  .accordion .accordion-item-label::after {
+    transition-duration: 0.01ms;
+  }
 }

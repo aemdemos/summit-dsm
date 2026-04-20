@@ -1,6 +1,11 @@
-/* footer design tokens */
+/* footer — align strip with Solutions / Insights (`--accordion-strip-max-width` / 2vw) */
 :root {
-  --footer-max-width: var(--max-width-site);
-  --footer-padding: 40px 24px 24px;
-  --footer-padding-desktop: 40px 32px 24px;
+  /*
+   * Logo display width — dicksmedia footer uses Squarespace `.fluid-image-container` + `sizes`;
+   * at 1200px viewport the delivered logo is ~183px wide (footer-logo.png). Not the raw 368×86 asset.
+   */
+  --footer-logo-max-width: clamp(120px, 15.25vw, 188px);
+  --footer-max-width: 1470px;
+  --footer-padding: clamp(28px, 3.5vw, 44px) 2vw clamp(22px, 3vw, 36px);
+  --footer-padding-desktop: clamp(32px, 4vw, 48px) 2vw clamp(28px, 3.5vw, 40px);
 }

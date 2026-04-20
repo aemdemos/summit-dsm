@@ -6,10 +6,21 @@
   --header-nav-padding-desktop: 0 40px;
   --header-nav-gap: 24px;
   --header-nav-gap-desktop: 32px;
-  --header-brand-width: 180px;
+
+  /* dicksmedia primary nav links + CTA label (~14.56px at default root) */
+  --header-nav-link-font-size: 0.91rem;
+
+  /* Match dicksmedia header logo width: ~287px @900, ~342px @1200 (linear in viewport) */
+  --header-brand-max-width: min(342px, 90vw, calc(122px + 18.333vw));
+  --header-brand-max-height: 90px;
   --header-dropdown-width: 200px;
-  --header-dropdown-padding: 16px;
-  --header-dropdown-left: -16px;
+  --header-dropdown-padding: 7px 15px;
+  --header-dropdown-left: -15px;
+  --header-dropdown-top-gap: 4px;
+
+  /* dicksmedia .header-nav-folder-content */
+  --header-dropdown-panel-bg: #f9fbf2;
+  --header-dropdown-panel-color: rgb(0 0 0);
   --header-hamburger-size: 22px;
   --header-hamburger-bar-width: 20px;
   --header-hamburger-bar-height: 2px;

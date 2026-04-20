@@ -215,6 +215,9 @@ var CustomImportScript = (() => {
       }
     }
     const block = WebImporter.Blocks.createBlock(document, { name: "cards", cells });
+    if (listItems.length > 0) {
+      block.classList.add("insights");
+    }
     element.replaceWith(block);
   }
 

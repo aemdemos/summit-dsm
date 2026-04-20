@@ -1,11 +1,23 @@
-/* accordion design tokens — dark theme */
+/* accordion design tokens — dark theme (FAQ strip matches cards `cards.css`) */
 :root {
+  /* Legacy CTA → FAQ block — tuned to ~82px vs dicksmedia.com (fluid fe-684b206 → FAQS label) */
+  --accordion-faqs-gap-above-eyebrow: clamp(68px, 6.85vw, 92px);
+
+  /* Tight band under “FAQS” before first question (source is noticeably smaller than the gap above) */
+  --accordion-faqs-gap-below-eyebrow: clamp(10px, 1.25vw, 18px);
+  --accordion-after-legacy-columns-margin-top: var(--accordion-faqs-gap-above-eyebrow);
+  --accordion-strip-max-width: 1470px;
   --accordion-item-border-width: 1px;
   --accordion-item-border-color: #333;
   --accordion-item-gap: 0;
-  --accordion-label-padding-x: 16px;
-  --accordion-label-padding-right: 46px;
-  --accordion-label-icon-right: 18px;
-  --accordion-body-padding-x: 16px;
+  --accordion-label-padding-x: 0;
+  --accordion-label-padding-right: 56px;
+  --accordion-label-icon-right: 2px;
+
+  /* Source PNGs 80×90; display smaller with contain (dicksmedia custom.css .accordion-icon-container) */
+  --accordion-icon-display-width: 32px;
+  --accordion-icon-display-height: calc(var(--accordion-icon-display-width) * 90 / 80);
+  --accordion-body-padding-x: 0;
   --accordion-transition-duration: 0.2s;
+  --accordion-expand-duration: 0.38s;
 }

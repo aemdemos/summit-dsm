@@ -1,11 +1,95 @@
 /* columns design tokens */
 :root {
   --columns-gap: 24px;
+
+  /* Split promo (dark section): copy column + headline rails */
+  --columns-copy-bg: #000;
+  --columns-heading-color: #fff;
+
+  /* “ACROSS” chip on brand partners line (grey pill on black) */
+  --columns-brand-across-highlight-bg: rgb(72 72 72 / 92%);
+
+  /* Promo stat “200” — match source scale (source left comp) */
+  --columns-brand-figures-size: clamp(40px, 6.8vw, 92px);
+
+  /* CTA — mint toward lighter teal (brand partners block) */
+  --columns-cta-gradient: linear-gradient(120deg, var(--accent-color) 0%, #8ef9e0 100%);
+
+  /*
+   * fluid-engine fe-6840331be7a45b676cb53898 (dicksmedia.com homepage inline CSS)
+   * https://www.dicksmedia.com/ — column-gap/row-gap 11px; image #block-19b0f6974474c1a22ace radius 8px
+   */
+  --columns-promo-gap: 11px;
+  --columns-promo-image-radius: 8px;
+
+  /*
+   * DMN_Photography_22.jpg — dimensions from live dicksmedia.com markup
+   * (https://www.dicksmedia.com/ data-image-dimensions / width × height on img)
+   */
+  --columns-image-aspect-w: 1138;
+  --columns-image-aspect-h: 1361;
+
+  /*
+   * Legacy CTA image frame — Squarespace fluid image `data-aspect-ratio` on
+   * #block-e597a85e0e4d23c6e9b3 (dicksmedia.com). Same as padding-bottom % / width
+   * in the source engine; intrinsic file is still 2200×2000 but the **slot** uses this ratio.
+   */
+  --columns-legacy-image-frame-aspect-w: 100;
+  /* stylelint-disable-next-line number-max-precision -- copy exact value from source data-aspect-ratio */
+  --columns-legacy-image-frame-aspect-h: 75.31953195319532;
+
+  /* data-image-focal-point="0.5,0.5" — matches inline object-position anchor on source img */
+  --columns-legacy-image-object-position: 50% 50%;
+
+  /*
+   * Legacy CTA fluid-engine fe-684b206b6b5d0a2feb065be3 + image fe-block-e597a85e0e4d23c6e9b3
+   * (dicksmedia.com inline CSS): grid column-gap/row-gap 11px; image grid-area desktop 1/2/14/14
+   * (= 12 of 24 inner tracks) vs copy stack ~10 cols → flex 12 : 10.
+   */
+  --columns-legacy-grid-gap: 11px;
+  --columns-legacy-image-flex: 12;
+  --columns-legacy-copy-flex: 10;
+
+  /*
+   * Promo image frame — started from fluid-engine fe-6840331… (125/86), then nudged
+   * taller/wider to match comp feedback (includes +50px height pass vs prior token).
+   */
+  --columns-promo-image-aspect-w: 125;
+  --columns-promo-image-aspect-h: 118;
+
+  /* Flex split: image column slightly wider than 12:11 source grid */
+  --columns-promo-copy-flex: 11;
+  --columns-promo-image-flex: 13;
+
+  /* #block-19b0f6974474c1a22ace --image-component-focal-point (same page) */
+  --columns-promo-image-object-position: 52.4002% 19.2012%;
+
+  /*
+   * Bracketed h2 — geometry from dicksmedia `.html-block h2 em`; inline padding kept modest
+   * so rails sit close once <em> width is narrowed by `.columns-headline-line` splits.
+   */
+  --columns-bracket-em-padding-block: 0;
+  --columns-bracket-em-padding-inline: clamp(6px, 1.25vw, 14px);
+  --columns-bracket-rail-offset-y: -10px;
+  --columns-bracket-rail-width: 20px;
+  --columns-bracket-border: 3px solid;
+
+  /*
+   * Bracketed h2 type size — dicksmedia custom.css `.html-block h2 { --heading-2-size-value: 4.2 }`
+   * (Squarespace theme maps value → 4.2rem cap). Fluid middle tuned so desktop matches prior comp.
+   */
+  --columns-bracketed-h2-size-fluid: calc(3.55vw + 0.85rem);
+  --columns-bracketed-h2-size-max: 4.2rem;
+  --columns-bracketed-h2-size-min: 1.6rem;
 }
 
 @media (width >= 900px) {
   :root {
-    /* comp: clear gutter between photo and headline column */
     --columns-gap: 40px;
+
+    /* Default (non-promo) columns: image column width cap */
+    --columns-image-col-max-width: 560px;
+    --columns-image-col-width-pct: 48%;
+    --columns-image-inline-nudge: 70px;
   }
 }

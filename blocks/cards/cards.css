@@ -1,13 +1,194 @@
-@import url('./cards-tokens.css');
+/* cards design tokens — inlined so one request + no @import resolution issues */
+:root {
+  --cards-grid-min-width: 257px;
+  --cards-grid-gap: 16px;
+  --cards-card-border-width: 1px;
+  --cards-card-border-color: #333;
+  --cards-card-body-margin: 16px;
+  --cards-image-aspect-ratio: 4 / 3;
+  --cards-image-object-fit: cover;
 
-/* Cards section: match source width (686px per card × 2 + 11px gap) */
-main > .section.cards-container > div:not(.bg-image) {
-  max-width: 1383px;
-  padding: 0 2vw;
-  margin: 0 auto;
+  /*
+   * Insights — dicksmedia.com (Squarespace):
+   * - `UserItemsListSimple` / `.user-items-list-simple` → versioned `site.css` (grid columns, etc.).
+   * - **Case-study card look** → `#case-study-grid` in their `custom.css` (tokens + rules below match that file).
+   */
+
+  /* Solutions + Insights outer strip — beats `styles.css` `main > .section > div` (--max-width-site) */
+  --cards-strip-max-width: 1470px;
+  --cards-insights-extra-width: 0px;
+  --cards-insights-layout-max-width: var(--cards-strip-max-width);
+  --cards-insights-proportional: calc((var(--max-width-site) + var(--cards-insights-extra-width)) / var(--max-width-site));
+  --cards-insights-list-padding-top: calc(var(--cards-insights-proportional) * clamp(20px, 2vmax, 40px));
+  --cards-insights-list-padding-bottom: calc(var(--cards-insights-proportional) * clamp(48px, 6.6vmax, 120px));
+
+  /*
+   * #case-study-grid — literals from dicksmedia `custom.css` (re-verify if their bundle hash changes):
+   * https://static1.squarespace.com/static/custom-css/683ded34a3e20366db6cd804/683ded34a3e20366db6cd80c/213/custom.css
+   */
+
+  /* List grid gap (Squarespace simple lists often use 20px between tiles) */
+  --cards-insights-gap: 20px;
+
+  /* #case-study-grid li { padding: 40px !important; border-radius: 16px } */
+  --cards-insights-source-card-padding: 40px;
+  --cards-insights-source-card-radius: 16px;
+
+  /* #case-study-grid li .list-item-media { width: 80px !important; right: 25px } */
+  --cards-insights-source-logo-w: 80px;
+  --cards-insights-source-logo-right: 25px;
+
+  /* #case-study-grid li .list-item-content__description p:nth-child(2) { margin-bottom: 40px } */
+  --cards-insights-subtitle-after-stat-gap: 40px;
+  --cards-insights-subtitle-below-stat-offset: 10px;
+
+  /*
+   * Body stack: #case-study-grid does not set sizes; dicksmedia list uses Squarespace description
+   * fluid type — at wide viewports ~`--body-font-size-value: 1.1` → 1.1rem; CTA inherits small rem.
+   */
+  --cards-insights-subtitle-size: 1.1rem;
+  --cards-insights-body-copy-size: 1.1rem;
+  --cards-insights-card-link-size: 0.6875rem;
+
+  /* #case-study-grid … p:first-child { font-size: 5.2rem; line-height: 1em; font-family: 'DSGSans' } */
+  --cards-insights-stat-size: 5.2rem;
+  --cards-insights-body-line-height: 1.5;
+  --cards-insights-cta-top: clamp(10px, 2.5vw, 18px);
+
+  /* #case-study-grid li .list-item-content__button { margin-left: 25px } */
+  --cards-insights-cta-inline-offset: 25px;
+
+  /* Space beside stat + subtitle: logo column reserve */
+  --cards-insights-logo-reserve: calc(
+    var(--cards-insights-source-logo-w) + var(--cards-insights-source-logo-right)
+  );
+
+  /* Section CTA row — same strip cap as grid */
+  --cards-insights-section-cta-max-width: var(--cards-strip-max-width);
+  --cards-insights-grid-to-section-cta: clamp(40px, 5vw, 64px);
+
+  /* Section pill — horizontal padding (class `insights-section-cta-link` from cards.js) */
+  --cards-insights-section-cta-pill-padding-inline: clamp(2.25rem, 6vw, 3.75rem);
+
+  /* Light card chrome — list-section-simple card on black (#case-study-grid li) */
+  --cards-insights-card-bg: #f9faf5;
+  --cards-insights-card-radius: var(--cards-insights-source-card-radius);
+  --cards-insights-card-text: #0a0a0a;
+
+  /* #case-study-grid li .list-item-content__button */
+  --cards-insights-card-link: #006554;
 }
 
-/* Eyebrow label ("Solutions") */
+/*
+ * Solutions + Insights + case-study: one strip — same max-width, horizontal inset, and centering
+ * as Solutions (`padding: 0 2vw; margin: 0 auto`). Beats global `main > .section > div` (--max-width-site).
+ * `:has(.cards.insights)` covers Insights when `cards-container` is missing from the section class list.
+ */
+main > .section.cards-container > div:not(.bg-image),
+main > .section:has(.cards.insights) > div:not(.bg-image),
+main > .section:has(.cards.case-study) > div:not(.bg-image) {
+  max-width: var(--cards-strip-max-width);
+  padding: 0 2vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Top section inset — on the row above the grid (pairs with Solutions: eyebrow is first in block). */
+main > .section:has(.cards.insights) > .default-content-wrapper:has(+ .cards-wrapper),
+main > .section:has(.cards.case-study) > .default-content-wrapper:has(+ .cards-wrapper) {
+  padding-top: var(--cards-insights-list-padding-top);
+}
+
+/* Cards wrapper: stack block; space below grid + under section CTA lives on CTA wrapper (avoids double gap). */
+main > .section:has(.cards.insights) > div:not(.bg-image):has(.cards.insights),
+main > .section:has(.cards.case-study) > div:not(.bg-image):has(.cards.case-study) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-bottom: 0;
+}
+
+/*
+ * Eyebrow moved into `.cards` (cards.js): pre-grid default wrapper removed — put section top inset here.
+ */
+main > .section.insights-eyebrow-inline > div:not(.bg-image):has(.cards.insights),
+main > .section.insights-eyebrow-inline > div:not(.bg-image):has(.cards.case-study) {
+  padding-top: var(--cards-insights-list-padding-top);
+}
+
+/*
+ * Eyebrow before the grid — same rhythm as `.cards .cards-eyebrow` (margin-bottom 24px).
+ * Beats `styles.css` section label `p:first-child:last-child { margin-bottom: 0 }` when that single-p rule applies.
+ */
+main > .section:has(.cards.insights) > .default-content-wrapper:has(+ .cards-wrapper) > p:first-child,
+main > .section:has(.cards.case-study) > .default-content-wrapper:has(+ .cards-wrapper) > p:first-child {
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--label-color);
+  font-weight: 600;
+  margin: 0 0 24px;
+}
+
+/*
+ * Section CTA under grid — layout: sibling selector + `.insights-section-cta` from `cards.js`.
+ * Pill: `.insights-section-cta-link` matches `styles.css` standalone CTA + padding token (important wins injected/global).
+ */
+main > .section:has(.cards.insights) > .cards-wrapper ~ .default-content-wrapper,
+main > .section:has(.cards.case-study) > .cards-wrapper ~ .default-content-wrapper,
+main .section .insights-section-cta {
+  margin: var(--cards-insights-grid-to-section-cta) auto 0;
+  max-width: var(--cards-insights-section-cta-max-width);
+  width: 100%;
+  padding: 0 2vw var(--cards-insights-list-padding-bottom);
+  box-sizing: border-box;
+  text-align: center;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+main > .section:has(.cards.insights) > .cards-wrapper ~ .default-content-wrapper > p:first-child,
+main > .section:has(.cards.case-study) > .cards-wrapper ~ .default-content-wrapper > p:first-child,
+main .section .insights-section-cta > p {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+/* Same pill recipe as `styles.css` `main .section > .default-content-wrapper > p > a:only-child` */
+main .section a.insights-section-cta-link {
+  flex: 0 0 auto;
+  display: inline-block !important;
+  box-sizing: border-box !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background-color: var(--accent-color) !important;
+  color: #006554 !important;
+  border-radius: 300px !important;
+  padding: 0.6em var(--cards-insights-section-cta-pill-padding-inline) !important;
+  font-weight: 600 !important;
+  font-size: var(--body-font-size-s) !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+main .section a.insights-section-cta-link:hover,
+main .section a.insights-section-cta-link:focus {
+  background-color: var(--link-hover-color) !important;
+  color: #004d3f !important;
+  text-decoration: none !important;
+}
+
+/* Eyebrow label ("Solutions" / hoisted "Insights") — same as section label scale */
 .cards .cards-eyebrow {
   font-size: var(--body-font-size-xs);
   text-transform: uppercase;
@@ -15,6 +196,18 @@ main > .section.cards-container > div:not(.bg-image) {
   color: var(--label-color);
   font-weight: 600;
   margin: 0 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Stack eyebrow + grid like Solutions (eyebrow is first child inside `.cards`) */
+.cards.insights.block,
+.cards.case-study.block {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cards > ul {
@@ -112,68 +305,252 @@ main > .section.cards-container > div:not(.bg-image) {
   color: #004d3f;
 }
 
-/* Case study variant — horizontal list with small 80×80 logo thumbnails */
+/*
+ * Insights — Squarespace `UserItemsListSimple` + dicksmedia `#case-study-grid` (custom.css).
+ * Card shell, stat, logo, CTA: same rules at all breakpoints as live source (no layout scale factor).
+ */
+.cards.insights > ul,
 .cards.case-study > ul {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cards-insights-gap);
+
+  /* Same row → equal-height cards (stretch is grid default; avoid start-only sizing). */
+  align-items: stretch;
 }
 
+.cards.insights > ul > li,
 .cards.case-study > ul > li {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 24px;
-  border-radius: 0;
-  background: transparent;
+  position: relative;
+  display: grid;
+
+  /* Default: one column. With logo: row 1 is [stat | logo] so tops align (no absolute + offset). */
+  grid-template-columns: minmax(0, 1fr);
+
+  /* Row 3 grows so bottom links share one horizontal band across equal-height cards (CTA stays source-left). */
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0;
+  align-items: start;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--cards-insights-source-card-padding);
+  border-radius: var(--cards-insights-card-radius);
+  overflow: hidden;
+  background: var(--cards-insights-card-bg);
+  color: var(--cards-insights-card-text);
 }
 
+/* Second column = logo width + same inset as source `right: 25px` (logo sits flush to card padding edge). */
+.cards.insights > ul > li:has(.cards-card-image),
+.cards.case-study > ul > li:has(.cards-card-image) {
+  grid-template-columns: minmax(0, 1fr) var(--cards-insights-logo-reserve);
+}
+
+/* #case-study-grid li .list-item-media — same lockup size; grid top row + end aligns `right: 25px` rhythm */
+.cards.insights .cards-card-image,
 .cards.case-study .cards-card-image {
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
+  display: flex;
+  position: static;
+  grid-column: 2;
+  grid-row: 1;
+  place-self: start end;
+  width: var(--cards-insights-source-logo-w);
+  max-width: var(--cards-insights-source-logo-w);
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+  flex-flow: row nowrap;
+  place-content: flex-start flex-end;
+  align-items: flex-start;
+  line-height: 0;
 }
 
+/* Kill stray line-box gap under <picture> (logo sat low vs stat caps) */
+.cards.insights .cards-card-image picture,
+.cards.case-study .cards-card-image picture {
+  display: block;
+  line-height: 0;
+  flex: 0 0 auto;
+  align-self: flex-start;
+}
+
+/* #case-study-grid li .list-item-media img { width: 80px } */
+.cards.insights > ul > li img,
 .cards.case-study > ul > li img {
-  width: 80px;
-  min-width: 80px;
-  height: 80px;
+  display: block;
+  width: var(--cards-insights-source-logo-w);
+  max-width: var(--cards-insights-source-logo-w);
+  height: auto;
+  object-fit: contain;
+  object-position: top right;
   aspect-ratio: auto;
-  object-fit: fill;
-  overflow: clip;
+  flex: 0 0 auto;
+  align-self: flex-start;
 }
 
+.cards.insights .cards-card-body,
 .cards.case-study .cards-card-body {
   position: static;
+  display: contents;
   padding: 0;
+  min-height: 0;
+  color: var(--cards-insights-card-text);
+  font-family: var(--body-font-family);
+  font-size: var(--cards-insights-body-copy-size);
+  line-height: var(--cards-insights-body-line-height);
 }
 
+.cards.insights .cards-card-body p,
 .cards.case-study .cards-card-body p {
+  margin: 0;
   font-weight: 400;
+  color: inherit;
+  text-align: left;
 }
 
+.cards.insights .cards-card-body p + p,
+.cards.case-study .cards-card-body p + p {
+  margin-top: 0;
+}
+
+/* #case-study-grid … p:first-child — 5.2rem / DSGSans / flex; row 1 col 1 pairs with logo col 2 */
+.cards.insights .cards-card-body p:first-child,
 .cards.case-study .cards-card-body p:first-child {
-  font-size: 28px;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--cards-insights-stat-size);
   font-weight: 700;
+  line-height: 1;
+  color: var(--cards-insights-card-text);
+  text-decoration: none;
 }
 
+@supports (text-box-trim: both) {
+  .cards.insights .cards-card-body p:first-child,
+  .cards.case-study .cards-card-body p:first-child {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+}
+
+.cards.insights .cards-card-body p:first-child span,
+.cards.case-study .cards-card-body p:first-child span {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+/* #case-study-grid … p:first-child span:after — arrow_forward.png */
+.cards.insights .cards-card-body p:first-child span:first-of-type::after,
+.cards.case-study .cards-card-body p:first-child span:first-of-type::after {
+  content: '';
+  display: inline-block;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+  background: url("https://static1.squarespace.com/static/683ded34a3e20366db6cd804/t/68472538929cd00b4d34f641/1749493048638/arrow_forward.png") no-repeat;
+  background-size: contain;
+}
+
+.cards.insights .cards-card-body p:first-child strong,
+.cards.case-study .cards-card-body p:first-child strong,
+.cards.insights .cards-card-body p:first-child u,
+.cards.case-study .cards-card-body p:first-child u {
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+/* #case-study-grid … p:nth-child(2) { margin-bottom: 40px } */
+.cards.insights .cards-card-body p:nth-child(2),
 .cards.case-study .cards-card-body p:nth-child(2) {
-  font-size: var(--body-font-size-s);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-top: var(--cards-insights-subtitle-below-stat-offset);
+  margin-bottom: var(--cards-insights-subtitle-after-stat-gap);
+  font-family: var(--body-font-family);
+  font-size: var(--cards-insights-subtitle-size);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--cards-insights-card-text);
 }
 
+.cards.insights .cards-card-body p:nth-child(3),
+.cards.case-study .cards-card-body p:nth-child(3) {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  margin-top: 0;
+  padding-inline-end: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--cards-insights-body-copy-size);
+  font-weight: 400;
+  line-height: var(--cards-insights-body-line-height);
+  color: var(--cards-insights-card-text);
+}
+
+/* Per-card link — #case-study-grid li .list-item-content__button (underline + margin-left: 25px) */
+.cards.insights .cards-card-body p:last-child,
+.cards.case-study .cards-card-body p:last-child {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin-top: var(--cards-insights-cta-top);
+  padding-top: 0;
+  padding-inline-end: 0;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  text-align: left;
+}
+
+.cards.insights .cards-card-body p:last-child > a:only-child,
 .cards.case-study .cards-card-body p:last-child > a:only-child {
   display: inline;
   width: auto;
+  box-sizing: border-box;
   margin: 0;
-  background: none;
-  color: var(--accent-color);
-  border-radius: 0;
+  margin-left: var(--cards-insights-cta-inline-offset);
   padding: 0;
-  font-weight: 600;
-  font-size: var(--body-font-size-s);
-  text-transform: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--cards-insights-card-link);
+  font-family: var(--body-font-family);
+  font-size: var(--cards-insights-card-link-size);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.025em;
+  text-align: left;
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-underline-offset: 0.12em;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.cards.insights .cards-card-body p:last-child > a:only-child:hover,
+.cards.case-study .cards-card-body p:last-child > a:only-child:hover,
+.cards.insights .cards-card-body p:last-child > a:only-child:focus,
+.cards.case-study .cards-card-body p:last-child > a:only-child:focus {
+  background: transparent;
+  color: var(--accent-color);
   text-decoration: underline;
 }
 
@@ -182,17 +559,19 @@ main > .section.cards-container > div:not(.bg-image) {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .cards.insights > ul,
   .cards.case-study > ul {
-    flex-direction: row;
-    gap: 40px;
-  }
-
-  .cards.case-study > ul > li {
-    flex: 1;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--cards-insights-gap);
   }
 }
 
 @media (width >= 900px) {
+  .cards.insights > ul,
+  .cards.case-study > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .cards .cards-card-body h3 {
     font-size: 40px;
   }

@@ -8,7 +8,8 @@
  * Block library: 2 columns per row. Col1=image, Col2=text content
  * Used for:
  *   - section#solution-section: 4 numbered solution cards (image + number + title + desc + CTA)
- *   - section#case-study-grid: 3 case study cards (brand logo + metric + desc + CTA)
+ *   - section#case-study-grid: Insights strip — `UserItemsListSimple` + `#case-study-grid` custom.css;
+ *     EDS `.insights` + optional lone `<p>` label in the default block before `cards` (hoisted into `.cards` as `.cards-eyebrow`).
  * Selectors from captured DOM
  */
 export default function parse(element, { document }) {
@@ -112,5 +113,8 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'cards', cells });
+  if (listItems.length > 0) {
+    block.classList.add('insights');
+  }
   element.replaceWith(block);
 }

@@ -13,7 +13,43 @@ function sectionHasFaqEyebrowBeforeAccordion(block) {
   return Boolean(p && /faq/i.test(p.textContent.trim()));
 }
 
+/**
+ * Optional first row = eyebrow label (authorable).
+ * - One non-empty cell, or
+ * - Two cells with text only in the first (second empty) — matches common doc tables.
+ * @param {Element} block
+ * @returns {HTMLParagraphElement|null}
+ */
+function consumeOptionalEyebrowRow(block) {
+  const first = block.firstElementChild;
+  if (!first) return null;
+  const cells = [...first.children].filter((el) => el.nodeType === Node.ELEMENT_NODE);
+  if (cells.length === 0) return null;
+
+  let sourceCell = null;
+  if (cells.length === 1 && cells[0].textContent.trim()) {
+    [sourceCell] = cells;
+  } else if (
+    cells.length >= 2
+    && cells[0].textContent.trim()
+    && !cells[1].textContent.trim()
+  ) {
+    [sourceCell] = cells;
+  } else {
+    return null;
+  }
+
+  const p = document.createElement('p');
+  p.className = 'accordion-eyebrow';
+  p.replaceChildren(...sourceCell.childNodes);
+  moveInstrumentation(first, p);
+  first.remove();
+  return p;
+}
+
 export default function decorate(block) {
+  const authorEyebrow = consumeOptionalEyebrowRow(block);
+
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
@@ -58,10 +94,11 @@ export default function decorate(block) {
   });
 
   block.textContent = '';
-  if (!sectionHasFaqEyebrowBeforeAccordion(block)) {
+  if (authorEyebrow) {
+    block.append(authorEyebrow);
+  } else if (!sectionHasFaqEyebrowBeforeAccordion(block)) {
     const eyebrow = document.createElement('p');
     eyebrow.className = 'accordion-eyebrow';
-    /* dicksmedia.com FAQ section label (same role as cards.js “Solutions” / “Insights”) */
     eyebrow.textContent = 'FAQS';
     block.append(eyebrow);
   }
